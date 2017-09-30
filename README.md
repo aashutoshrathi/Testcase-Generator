@@ -1,7 +1,7 @@
 ## HackerRank Test Case Generator
 
 [<img src="https://image.flaticon.com/icons/svg/180/180867.svg" align="right" width="100">](#)
-[<img src="https://brandfolder.com/hackerrank/logo/hackerrank-primary-logo.png" align="left" width="100">](https://www.hackerrank.com/)
+[<img src="https://brandfolder.com/hackerrank/logo/hackerrank-primary-logo.png" align="right" width="100">](https://www.hackerrank.com/)
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)
 
