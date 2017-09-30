@@ -5,6 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
+*.obj
+
+# Java
+*.class
 
 # Distribution / packaging
 .Python
