@@ -10,7 +10,7 @@ One Click Test Case Generation for HackerRank Problems.
 
 Are you a Problem Author?
 
-The thoughest part of creating a problem is creating tricky, correct and constrainted Test Cases.
+The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
 
 Well, Here is one Click **Python 2** Codes, for your respective logic(solution) files.
 
