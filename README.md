@@ -22,9 +22,9 @@ Java | [TC Generator for Java](TC-Generators\TCGenForJava.py) | [Java](Examples\
 Python | [TC Generator for Python](TC-Generators\TCGenForPy.py) | [Python](Examples\Python) |
 
 
-## Demo
+## How it Works ?
 
-Will be updated as soon as I get good internet.
+![Demo](#)
 
 
 
