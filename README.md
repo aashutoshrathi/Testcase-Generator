@@ -24,7 +24,7 @@ Python | [TC Generator for Python](TC-Generators\TCGenForPy.py) | [Python](Examp
 
 ## How it Works ?
 
-![Demo](https://image.ibb.co/khsiyw/out.gif)
+![Demo](demo.gif)
 
 
 
