@@ -7,4 +7,6 @@
 
 ### Issues Solved
 
-[//]: # (List Issue Numbers)
+Fixes #{Issue Number}
+
+[//]: # For eg. `Fixes #5`
