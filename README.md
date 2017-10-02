@@ -16,10 +16,10 @@ Well, Here is one Click **Python 2** Codes, for your respective logic(solution) 
 
 Logic File | TC Generator Files | Example Files |
 ------------------ | ------------- | ---------------
-C | [TC Generator for C](TC-Generators\TCGenForC.py) | [C](Examples\C) |
-C++ | [TC Generator for C++](TC-Generators\TCGenForC++.py) | [C++](Examples\C++) |
-Java | [TC Generator for Java](TC-Generators\TCGenForJava.py) | [Java](Examples\Java) |
-Python | [TC Generator for Python](TC-Generators\TCGenForPy.py) | [Python](Examples\Python) |
+C | [TC Generator for C](TC-Generators\TCGenForC.py) | [C](Examples\C\logic.c) |
+C++ | [TC Generator for C++](TC-Generators\TCGenForC++.py) | [C++](Examples\C++\logic.cpp) |
+Java | [TC Generator for Java](TC-Generators\TCGenForJava.py) | [Java](Examples\Java\logic.java) |
+Python | [TC Generator for Python](TC-Generators\TCGenForPy.py) | [Python](Examples\Python\logic.py) |
 
 
 ## How it Works ?
