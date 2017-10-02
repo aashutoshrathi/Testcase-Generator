@@ -11,6 +11,7 @@ import random
 import sys
 import zipfile
 import math
+import shutil
 
 try:
 	os.mkdir('input')
@@ -45,8 +46,11 @@ for i in xrange(0, tf + 1):
 
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
 	for i in xrange(0, tf + 1):
-		print >>  sys.stderr, 'Zipping:', i
+		print >> sys.stderr, 'Zipping:', i
 		os.system('g++ -o logic logic.cpp')
 		os.system('./logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
+
+shutil.rmtree('input')
+shutil.rmtree('output')

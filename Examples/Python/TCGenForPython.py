@@ -11,6 +11,7 @@ import random
 import sys
 import zipfile
 import math
+import shutil
 
 try:
 	os.mkdir('input')
@@ -49,3 +50,6 @@ with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
 		os.system('python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
+
+shutil.rmtree('input')
+shutil.rmtree('output')
