@@ -9,4 +9,4 @@
 
 Fixes #{Issue Number}
 
-[//]: # For eg. `Fixes #5`
+<!--- For eg. `Fixes #5` --->
