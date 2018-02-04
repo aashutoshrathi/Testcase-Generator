@@ -14,24 +14,23 @@ The toughest part of creating a problem is creating tricky, correct and constrai
 
 Well, Here is one Click **Python 2 and Python 3** Codes, for your respective logic(solution) files.
 
+##### Use Python 3 Files as they are updated and will give execution time for each test case during generation.
+
+
+
 ### Python 2 Codes and Examples
 
-Logic File | TC Generator Files | Example Files |
+Logic File | TC Generator File | Example File |
 ------------------ | ------------- | ---------------
-C | [TC Generator for C](/Python2/TC-Generators/TCGenForC.py) | [C](/Python2/Examples/C) |
-C++ | [TC Generator for C++](/Python2/TC-Generators/TCGenForC++.py) | [C++](/Python2/Examples/C++) |
-Java | [TC Generator for Java](/Python2/TC-Generators/TCGenForJava.py) | [Java](/Python2/Examples/Java) |
-Python | [TC Generator for Python](/Python2/TC-Generators/TCGenForPy.py) | [Python](/Python2/Examples/Python) |
+C / C++ / Java / Python | [TC Generator](/Python2/TC-Generator/TCGen.py) | [Example](/Python2/Example) |
 
 
 ### Python 3 Codes and Examples
 
-Logic File | Example Files |
+Logic File | Example File |
 ------------------ | ---------------
-C |  [C](/Python3/Examples/C) |
-C++ | [C++](/Python3/Examples/C++) |
-Java | [Java](/Python3/Examples/Java) |
-Python | [Python](/Python3/Examples/Python) |
+C / C++ / Java / Python |  [Example](/Python3/Example) |
+
 
 
 ## How it Works ?

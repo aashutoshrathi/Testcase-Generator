@@ -1,15 +1,19 @@
-[//]: # (**********************************)
-[//]: # (** Fill in the following fields **)
-[//]: # (**********************************)
+**Actual Behaviour**
 
-[//]: # (Note: Lines beginning with syntax such as this one, are comments and will not be visible in your report!)
+<!--State here what is currently happening.-->
 
-### Description
+**Expected Behaviour**
 
-[//]: # (Description of the problem or issue at length.)
-[//]: # (Make sure to add **all the information needed to understand the bug** so that someone can help. If the info is missing we'll add the 'Needs more information' label and close the issue until there is enough information.)
+<!--State here what the feature should enable the user to do.-->
 
-### Required Information
-- [ ] Provide a **minimal code snippet** / example that reproduces the bug.
-- [ ] Provide **screenshots** (if required)
-- [ ] Provide github **revision**
+**Steps to reproduce it**
+
+<!--Add steps to reproduce bugs or add information on the place where the feature should be implemented. Add links to a sample deployment or code.-->
+
+**Screenshots of the issue** (if required)
+
+<!--Wherever possible add a screenshot of the issue.-->
+
+**Would you like to work on the issue?**
+
+<!--Let us know if this issue should be assigned to you or tell us who you think could help to solve this issue.-->
