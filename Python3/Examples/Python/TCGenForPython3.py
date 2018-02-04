@@ -12,6 +12,7 @@ import sys
 import zipfile
 import math
 import shutil
+import time
 
 try:
 	os.mkdir('input')
@@ -36,10 +37,10 @@ for i in range(0, tf + 1):
 	'''
 
 	### Input File Printing Start
-	x = rint(1, 100) # number of test cases in (1,10^5)
+	x = rint(1, 1000) # number of test cases in (1,10^5)
 	print(x) # Prints x into input file
 	for z in range (x):
-		print(rint(1, 100000)) 
+		print(rint(1, 10000000)) 
 	sys.stdout.close()
 	### Input File Printing Ends
 
@@ -47,7 +48,10 @@ for i in range(0, tf + 1):
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
 	for i in range(0, tf + 1):
 		print('Zipping:', i, file=sys.stderr)
+		start = time.time()
 		os.system('python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
+		end = time.time()
+		print('Time taken to execute this TC %02f' %(end - start), file=sys.stderr)
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
 

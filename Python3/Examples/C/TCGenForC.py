@@ -11,6 +11,7 @@ import random
 import sys
 import zipfile
 import math
+import time
 import shutil
 
 try:
@@ -47,8 +48,11 @@ for i in range(0, tf + 1):
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
 	for i in range(0, tf + 1):
 		print('Zipping:', i, file=sys.stderr)
-		os.system('gcc -o logic logic.cpp')
+		start = time.time()
+		os.system('gcc -o logic logic.c')
 		os.system('./logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+		end = time.time()
+		print('Time taken to execute this TC %02f' %(end - start), file=sys.stderr)
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
 

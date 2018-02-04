@@ -11,6 +11,7 @@ import sys
 import zipfile
 import math
 import shutil
+import time
 
 try:
 	os.mkdir('input')
@@ -49,8 +50,11 @@ just replace '<filename>' with your actual filename everywhere
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf: # You can change zip filename as per your wish.
 	for i in range(0, tf + 1):
 		print('Zipping:', i, file=sys.stderr) # Will show status of which TC output is generated.
+		start = time.time()
 		os.system('javac logic.java') # System call to compile your file
 		os.system('java logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+		end = time.time()
+		print('Time taken to execute this TC %02f' %(end - start), file=sys.stderr)
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
 
