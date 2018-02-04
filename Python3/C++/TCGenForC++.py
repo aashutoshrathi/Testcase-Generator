@@ -25,9 +25,9 @@ rint = random.randint
 tf = 10 # number of test files, change it according to you.
 
 
-for i in xrange(0, tf + 1):
-	print >> sys.stderr, 'Generating:', i
-	sys.stdout = open('input/input%02d.txt' % i, 'wb')
+for i in range(0, tf + 1):
+	print ('Generating:', i, file=sys.stderr)
+	sys.stdout = open('input/input%02d.txt' % i, 'w')
 	
 	'''
 	Input area will start here,
@@ -36,18 +36,19 @@ for i in xrange(0, tf + 1):
 	'''
 
 	### Input File Printing Start
-	x = rint(5, pwr(10, (i//2) + 1)) # number of test cases in (1,10^5)
-	print x # Prints x into input file
+	x = rint(1, 100) # number of test cases in (1,100)
+	print(x) # Prints x into input file
 	for z in range (x):
-		print rint(1,pwr(10, min(4, max(i//2 ,2)))) 
+		print(rint(1, 100000)) 
 	sys.stdout.close()
 	### Input File Printing Ends
 
 
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
-	for i in xrange(0, tf + 1):
-		print >> sys.stderr, 'Zipping:', i
-		os.system('python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
+	for i in range(0, tf + 1):
+		print('Zipping:', i, file=sys.stderr)
+		os.system('g++ -o logic logic.cpp')
+		os.system('./logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
 		zf.write('input/input%02d.txt' % i)
 		zf.write('output/output%02d.txt' % i)
 

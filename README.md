@@ -12,14 +12,26 @@ Are you a Problem Author?
 
 The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
 
-Well, Here is one Click **Python 2** Codes, for your respective logic(solution) files.
+Well, Here is one Click **Python 2 and Python 3** Codes, for your respective logic(solution) files.
+
+### Python 2 Codes and Examples
 
 Logic File | TC Generator Files | Example Files |
 ------------------ | ------------- | ---------------
-C | [TC Generator for C](TC-Generators/TCGenForC.py) | [C](Examples/C) |
-C++ | [TC Generator for C++](TC-Generators/TCGenForC++.py) | [C++](Examples/C++) |
-Java | [TC Generator for Java](TC-Generators/TCGenForJava.py) | [Java](Examples/Java) |
-Python | [TC Generator for Python](TC-Generators/TCGenForPy.py) | [Python](Examples/Python) |
+C | [TC Generator for C](/Python2/TC-Generators/TCGenForC.py) | [C](/Python2/Examples/C) |
+C++ | [TC Generator for C++](/Python2/TC-Generators/TCGenForC++.py) | [C++](/Python2/Examples/C++) |
+Java | [TC Generator for Java](/Python2/TC-Generators/TCGenForJava.py) | [Java](/Python2/Examples/Java) |
+Python | [TC Generator for Python](/Python2/TC-Generators/TCGenForPy.py) | [Python](/Python2/Examples/Python) |
+
+
+### Python 3 Codes and Examples
+
+Logic File | Example Files |
+------------------ | ---------------
+C |  [C](/Python3/Examples/C) |
+C++ | [C++](/Python3/Examples/C++) |
+Java | [Java](/Python3/Examples/Java) |
+Python | [Python](/Python3/Examples/Python) |
 
 
 ## How it Works ?
