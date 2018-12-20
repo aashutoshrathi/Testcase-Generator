@@ -12,24 +12,15 @@ Are you a Problem Author?
 
 The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
 
-Well, Here is one Click **Python 2 and Python 3** Codes, for your respective logic(solution) files.
-
-##### Use Python 3 Files as they are updated and will give execution time for each test case during generation.
+Well, Here is one Click **Python** Codes, for your respective logic(solution) files.
 
 
 
-### Python 2 Codes and Examples
+### Python Codes and Examples
 
 Logic File | TC Generator File | Example File |
 ------------------ | ------------- | ---------------
-C / C++ / Java / Python | [TC Generator](/Python2/TC-Generator/TCGen.py) | [Example](/Python2/Example) |
-
-
-### Python 3 Codes and Examples
-
-Logic File | Example File |
------------------- | ---------------
-C / C++ / Java / Python |  [Example](/Python3/Example) |
+C / C++ / Java / Python | [TC Generator](/Python/TC-Generator/TCGen.py) | [Example](/Python/Example) |
 
 
 
