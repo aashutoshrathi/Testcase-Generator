@@ -5,13 +5,18 @@ Testcase Generator for HackerRank
 
 '''
 
+from __future__ import print_function
+
 import os
 import random
 import sys
 import zipfile
 import math
-import time
 import shutil
+
+if sys.version[0] == '3':
+    raw_input = input
+    xrange = range
 
 try:
     os.mkdir('input')
@@ -19,17 +24,14 @@ try:
 except OSError:
     pass
 
-pwr = math.pow
-rint = random.randint
-
-choice = int(input("Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n"))
+choice = int(raw_input("Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n"))
 if choice != 1 and choice != 2 and choice != 3 and choice != 4:
     print("Wrong choice entered!")
     exit()
 
 tf = 10  # number of test files, change it according to you.
 
-for i in range(0, tf + 1):
+for i in xrange(0, tf + 1):
     print('Generating:', i, file=sys.stderr)
     sys.stdout = open('input/input%02d.txt' % i, 'w')
 
@@ -40,37 +42,36 @@ for i in range(0, tf + 1):
     '''
 
     # Input File Printing Starts
-    x = rint(1, 100)  # number of test cases in (1,100)
-    print(x)  # Prints x into input file
-    for z in range(x):
-        print(rint(1, 100000))
+
     sys.stdout.close()
     # Input File Printing Ends
 
 
+'''
+Output generation and zipping starts here
+just replace '<filename>' with your actual filename everywhere
+
+'''
+# You can change zip filename as per your wish.
 with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
-    for i in range(0, tf + 1):
-        print('Zipping:', i, file=sys.stderr)
-        start = time.time()
+    for i in xrange(0, tf + 1):
+        print('Zipping:', i, file=sys.stderr)  # Will show status of which TC output is generated.
 
         if choice == 1:  # Choice of language is C
-            os.system('gcc -o logic logic.c')  # System call to compile .c file
+            os.system('gcc -o <filename> <filename>.c')  # System call to compile .c file
             # System call to generate output files for C
-            os.system('./logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+            os.system('./<filename> < input/input%02d.txt > output/output%02d.txt' % (i, i))
         elif choice == 2:  # Choice of language is C++
-            os.system('g++ -o logic logic.cpp')  # System call to compile .cpp file
+            os.system('g++ -o <filename> <filename>.cpp')  # System call to compile .cpp file
             # System call to generate output files for C++
-            os.system('./logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+            os.system('./<filename> < input/input%02d.txt > output/output%02d.txt' % (i, i))
         elif choice == 3:  # Choice of language is Java
-            os.system('javac logic.java')  # System call to compile .java file
+            os.system('javac <filename>.java')  # System call to compile .java file
             # System call to generate output files for Java
-            os.system('java logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+            os.system('java <filename> < input/input%02d.txt > output/output%02d.txt' % (i, i))
         elif choice == 4:  # Choice of language is Python
             # System call to generate output files for Python
-            os.system('python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
-
-        end = time.time()
-        print('Time taken to execute this TC %02f' % (end - start), file=sys.stderr)
+            os.system('python <filename>.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
 
         zf.write('input/input%02d.txt' % i)
         zf.write('output/output%02d.txt' % i)
