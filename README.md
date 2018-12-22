@@ -4,6 +4,8 @@
 [<img src="https://brandfolder.com/hackerrank/logo/hackerrank-primary-logo.png" align="right" width="100">](https://www.hackerrank.com/)
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-oxygen.svg)](https://forthebadge.com)
 
 One Click Test Case Generation for HackerRank Problems.
 
