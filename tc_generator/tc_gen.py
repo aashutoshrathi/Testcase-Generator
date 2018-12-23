@@ -52,7 +52,15 @@ def generate(choice, i):
                 (i, i))
 
     except BaseException:
-        print("No compiler found")
+        if choice == 1:
+            print(
+                "Looks like you don't have GCC :/ \nYou can refer to https://gcc.gnu.org/install/ for help. ")
+        elif choice == 2:
+            print("Looks like you don't have G++ :/ \nYou can refer to https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/ for help. ")
+        elif choice == 3:
+            print("Looks like you don't have Java Compiler :/ \nYou can refer to https://introcs.cs.princeton.edu/java/15inout/windows-cmd.html for help. ")
+        elif choice == 4:
+            print("Looks like you don't have Python Compiler :/ \nYou can refer to https://www.python.org/downloads/ for help. ")
 
 
 def compile_them(choice):
