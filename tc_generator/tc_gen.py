@@ -30,9 +30,14 @@ RINT = random.randint
 
 
 def generate(choice, i):
-    if choice == 1:  # Choice of language is C
-        os.system(
-            './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+    try:
+        if choice == 1:  # Choice of language is C
+            os.system(
+                './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+    
+    except:
+        print("No compiler found for C")
+    
     elif choice == 2:  # Choice of language is C++
         os.system(
             './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
