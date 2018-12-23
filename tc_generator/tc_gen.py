@@ -33,25 +33,27 @@ def generate(choice, i):
     try:
         if choice == 1:  # Choice of language is C
             os.system(
-                './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-        
+                './logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+
         elif choice == 2:  # Choice of language is C++
             os.system(
-                './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    
+                './logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+
         elif choice == 3:  # Choice of language is Java
             os.system(
-                'java logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
+                'java logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
         elif choice == 4:  # Choice of language is Python
             # System call to generate output files for Python
             os.system(
-                'python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
+                'python logic.py < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
 
-    except:
+    except BaseException:
         print("No compiler found")
-    
-        
-    
+
 
 def compile_them(choice):
     if choice == 1:  # Choice of language is C
