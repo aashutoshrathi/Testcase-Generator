@@ -30,19 +30,37 @@ RINT = random.randint
 
 
 def generate(choice, i):
-    if choice == 1:  # Choice of language is C
-        os.system(
-            './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 2:  # Choice of language is C++
-        os.system(
-            './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 3:  # Choice of language is Java
-        os.system(
-            'java logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 4:  # Choice of language is Python
-        # System call to generate output files for Python
-        os.system(
-            'python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
+    try:
+        if choice == 1:  # Choice of language is C
+            os.system(
+                './logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+
+        elif choice == 2:  # Choice of language is C++
+            os.system(
+                './logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+
+        elif choice == 3:  # Choice of language is Java
+            os.system(
+                'java logic < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+        elif choice == 4:  # Choice of language is Python
+            # System call to generate output files for Python
+            os.system(
+                'python logic.py < input/input%02d.txt > output/output%02d.txt' %
+                (i, i))
+
+    except BaseException:
+        if choice == 1:
+            print(
+                "Looks like you don't have GCC :/ \nYou can refer to https://gcc.gnu.org/install/ for help. ")
+        elif choice == 2:
+            print("Looks like you don't have G++ :/ \nYou can refer to https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/ for help. ")
+        elif choice == 3:
+            print("Looks like you don't have Java Compiler :/ \nYou can refer to https://introcs.cs.princeton.edu/java/15inout/windows-cmd.html for help. ")
+        elif choice == 4:
+            print("Looks like you don't have Python Compiler :/ \nYou can refer to https://www.python.org/downloads/ for help. ")
 
 
 def compile_them(choice):
