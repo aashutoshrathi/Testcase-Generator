@@ -28,31 +28,47 @@ except OSError:
 POWER = math.pow
 RINT = random.randint
 
+LANGS = [
+    {
+        'req': 'gcc',
+        'command': './logic',
+        'link': 'https://gcc.gnu.org/install/',
+        'compile': 'gcc -o logic logic.c'
+    },
+    {
+        'req': 'g++',
+        'command': './logic',
+        'link': 'https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/',
+        'compile': 'g++ -o logic logic.cpp'
+    },
+    {
+        'req': 'Java',
+        'command': 'java logic',
+        'link': 'https://introcs.cs.princeton.edu/java/15inout/windows-cmd.html',
+        'compile': 'javac logic.java'
+    },
+    {
+        'req': 'Python',
+        'command': 'python logic.py',
+        'link': 'https://www.python.org/downloads/',
+        'compile': ''
+    },
+]
+
 
 def generate(choice, i):
-    if choice == 1:  # Choice of language is C
-        os.system(
-            './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 2:  # Choice of language is C++
-        os.system(
-            './logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 3:  # Choice of language is Java
-        os.system(
-            'java logic < input/input%02d.txt > output/output%02d.txt' % (i, i))
-    elif choice == 4:  # Choice of language is Python
-        # System call to generate output files for Python
-        os.system(
-            'python logic.py < input/input%02d.txt > output/output%02d.txt' % (i, i))
+    try:
+        os.system('%s < input/input%02d.txt > output/output%02d.txt' %
+                  (LANGS[choice-1]['command'], i, i))
+
+    except Exception:
+        print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
+            LANGS[choice-1]['req'], LANGS[choice-1]['link']))
 
 
-def compile_them(choice):
-    if choice == 1:  # Choice of language is C
-        os.system('gcc -o logic logic.c')  # System call to compile .c file
-    elif choice == 2:  # Choice of language is C++
-        # System call to compile .cpp file
-        os.system('g++ -o logic logic.cpp')
-    elif choice == 3:  # Choice of language is Java
-        os.system('javac logic.java')  # System call to compile .java file
+def compile_them(test_files, choice):
+    if os.system(LANGS[choice-1]['compile']) == 0:
+        zip_them(test_files, choice)
 
 
 def zip_them(test_files, choice):
@@ -100,8 +116,7 @@ def main():
 
         sys.stdout.close()
         # Input File Printing Ends
-    compile_them(choice)
-    zip_them(test_files, choice)
+    compile_them(test_files, choice)
     shutil.rmtree('input')
     shutil.rmtree('output')
 
