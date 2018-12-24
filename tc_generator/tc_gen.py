@@ -55,9 +55,9 @@ LANGS = [
     },
     {
         'req': 'C#',
-        'command': 'logic',
+        'command': 'mono logic',
         'link': 'https://www.mono-project.com/docs/about-mono/languages/csharp/',
-        'compile': 'csc logic.cs'
+        'compile': 'msc logic.cs'
     },
 ]
 
