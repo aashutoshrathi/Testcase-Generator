@@ -23,4 +23,3 @@ LANGS = [{'req': 'gcc',
           'link': 'https://golang.org/doc/install',
           'compile': 'go build logic.go'},
          ]
-

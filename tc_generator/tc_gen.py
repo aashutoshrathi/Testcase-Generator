@@ -30,6 +30,7 @@ except OSError:
 POWER = math.pow
 RINT = random.randint
 
+
 def generate(choice, i):
     try:
         os.system('%s < input/input%02d.txt > output/output%02d.txt' %
