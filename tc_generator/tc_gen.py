@@ -100,7 +100,7 @@ def zip_them(test_files, choice):
 def main():
     choice = int(INPUT(
         "Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n5 for C#\n6 for Golang"))
-    if choice not in (1, 2, 3, 4, 5, 6):
+    if choice not in range(1,6):
         print("Wrong choice entered!")
         exit()
 
