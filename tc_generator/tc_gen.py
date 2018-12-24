@@ -86,8 +86,8 @@ def zip_them(test_files, choice):
 
 def main():
     choice = int(INPUT(
-        "Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n5 for C#\n6 for Golang"))
-    if choice not in range(1, 6):
+        "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
+    if choice not in range(1, 7):
         print("Wrong choice entered!")
         exit()
 
@@ -103,15 +103,11 @@ def main():
         '''
 
         # Input File Printing Starts
-
-        if choice in (1, 2, 4):
-            # number of test cases in (1,10^5)
-            required_input = RINT(5, POWER(10, (i // 2) + 1))
-            print(required_input)  # Prints x into input file
-            for _ in range(required_input):
-                print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
-        elif choice == 3:
-            print(RINT(1, 5))
+        # number of test cases in (1,10^5)
+        required_input = RINT(5, POWER(10, (i // 2) + 1))
+        print(required_input)  # Prints x into input file
+        for _ in range(required_input):
+            print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
         sys.stdout.close()
         # Input File Printing Ends
