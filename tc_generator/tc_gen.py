@@ -59,6 +59,12 @@ LANGS = [
         'link': 'https://www.mono-project.com/docs/about-mono/languages/csharp/',
         'compile': 'msc logic.cs'
     },
+    {
+        'req': 'Golang',
+        'command': './logic',
+        'link': 'https://golang.org/doc/install',
+        'compile': 'go build logic.go'
+    },
 ]
 
 
@@ -93,8 +99,8 @@ def zip_them(test_files, choice):
 
 def main():
     choice = int(INPUT(
-        "Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n5 for C#"))
-    if choice not in (1, 2, 3, 4, 5):
+        "Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n5 for C#\n6 for Golang"))
+    if choice not in (1, 2, 3, 4, 5, 6):
         print("Wrong choice entered!")
         exit()
 
