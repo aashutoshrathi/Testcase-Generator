@@ -37,9 +37,11 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 ```
 ```sh
    $ activate
-
-   $ pip install -r requirements.txt
 ```
+```sh
+   $ pip install -r requirements.txt
+```   
+
 ### How it Works ? 🤔
 
 ![Demo](demo.gif)
