@@ -21,7 +21,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ## Install
 
-### How to run:  
+### How to Use ? :smiley:
 
 * Clone the repository ```sh $ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git ```.
 
