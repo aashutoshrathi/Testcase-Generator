@@ -22,7 +22,8 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ### How to run:  
 
-Clone the repository ```sh $ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git ```
+Clone the repository ```sh $ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git ```.
+
 Create a virtual environment
 [Click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
 
