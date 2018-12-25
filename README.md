@@ -18,7 +18,28 @@ Well, Here is one Click **Python** Code, for your respective logic(solution) fil
 Logic File | TC Generator File |
 ------------------ | ------------- |
 C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
+## Install
 
+### How to run:  
+
+```sh
+   $ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git
+```
+   [Click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
+
+* #### For Linux
+```sh
+   $ source ./venv/bin/activate
+```
+* #### For windows
+```sh
+   $ cd venv/Scripts/
+```
+```sh
+   $ activate
+
+   $ pip install -r requirements.txt
+```
 ### How it Works ? 🤔
 
 ![Demo](demo.gif)
