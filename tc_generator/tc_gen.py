@@ -15,6 +15,8 @@ import zipfile
 
 import math
 
+from lang_compiler import LANGS
+
 if sys.version[0] == '3':
     INPUT = input
     XRange = range
@@ -27,32 +29,6 @@ except OSError:
 
 POWER = math.pow
 RINT = random.randint
-
-LANGS = [{'req': 'gcc',
-          'command': './logic',
-          'link': 'https://gcc.gnu.org/install/',
-          'compile': 'gcc -o logic logic.c'},
-         {'req': 'g++',
-          'command': './logic',
-          'link': 'https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/',
-          'compile': 'g++ -o logic logic.cpp'},
-         {'req': 'Java',
-          'command': 'java logic',
-          'link': 'https://introcs.cs.princeton.edu/java/15inout/windows-cmd.html',
-          'compile': 'javac logic.java'},
-         {'req': 'Python',
-          'command': 'python logic.py',
-          'link': 'https://www.python.org/downloads/',
-          'compile': ''},
-         {'req': 'C#',
-          'command': 'mono logic',
-          'link': 'https://www.mono-project.com/docs/about-mono/languages/csharp/',
-          'compile': 'msc logic.cs'},
-         {'req': 'Golang',
-          'command': './logic',
-          'link': 'https://golang.org/doc/install',
-          'compile': 'go build logic.go'},
-         ]
 
 
 def generate(choice, i):
@@ -86,8 +62,8 @@ def zip_them(test_files, choice):
 
 def main():
     choice = int(INPUT(
-        "Enter your choice of language\n1 for C\n2 for C++\n3 for Java\n4 for Python\n5 for C#\n6 for Golang"))
-    if choice not in range(1, 6):
+        "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
+    if choice not in range(1, 7):
         print("Wrong choice entered!")
         exit()
 
@@ -103,15 +79,11 @@ def main():
         '''
 
         # Input File Printing Starts
-
-        if choice in (1, 2, 4):
-            # number of test cases in (1,10^5)
-            required_input = RINT(5, POWER(10, (i // 2) + 1))
-            print(required_input)  # Prints x into input file
-            for _ in range(required_input):
-                print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
-        elif choice == 3:
-            print(RINT(1, 5))
+        # number of test cases in (1,10^5)
+        required_input = RINT(5, POWER(10, (i // 2) + 1))
+        print(required_input)  # Prints x into input file
+        for _ in range(required_input):
+            print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
         sys.stdout.close()
         # Input File Printing Ends
