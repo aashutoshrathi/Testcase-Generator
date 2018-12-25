@@ -25,8 +25,8 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 * Clone the repository ```sh $ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git ```.
 
-* Create a virtual environment ```sh $ virtualenv venve ```.
-[Click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
+* Create a virtual environment ```sh $ virtualenv venve ```, 
+[click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
 
 * #### Activate virtualenv (Linux)
 ```sh
@@ -35,11 +35,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 * #### Activate virtualenv (Windows)
 ```sh
    $ cd venv/Scripts/
-```
-```sh
    $ activate
-```
-```sh
    $ pip install -r requirements.txt
 ```   
 
