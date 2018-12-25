@@ -38,6 +38,11 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
    $ activate
    $ pip install -r requirements.txt
 ```   
+* Go to ```sh tc_generator ```
+```sh
+   $ cd tc_generator/
+   $ python tc_gen.py
+```
 
 ### How it Works ? 🤔
 
