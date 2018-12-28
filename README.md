@@ -23,7 +23,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ### How to Use ? 😃
 
-* Clone the repository `$ git clone https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator.git `.
+* Clone the repository `$ git clone https://github.com/aashutoshrathi/HackerRank-Test-Case-Generator.git `
 
 * Create a virtual environment `$ virtualenv venv `, 
 [click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
