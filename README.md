@@ -43,9 +43,13 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
    $ cd tc_generator/
    $ python tc_gen.py
 ```
-
 ### How it Works ? 🤔
 
 ![Demo](demo.gif)
+
+## Stargazers over time 📈
+
+[![Stargazers over time](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator.svg)](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator)
+
 
 <p align="center"> Made with ❤ by <a href="https://github.com/aashutoshrathi">Aashutosh Rathi</a></p>
