@@ -11,7 +11,13 @@ Are you a Problem Author?
 
 The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
 
-Well, Here is one Click **Python** Code, for your respective logic(solution) files.
+Well, Here is one Click **Python** Code, for your respective logic(solution).
+
+### Mentions
+
+- [Blog post](https://medium.com/@agarwalrounak/my-nwoc-njack-winter-of-code-2018-experience-badf30b9c02d) on experince in NWoC 2018 by Rounak Agarwal.
+- Selected as project in [GSSoC 2019](https://www.gssoc.tech/projects.html)
+- Selected as project in [NJACKWinterOfCode 2018]([https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator](https://njackwinterofcode.github.io/))
 
 ### Python Codes and Examples
 
