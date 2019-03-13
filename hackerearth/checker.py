@@ -19,13 +19,17 @@ try:
 except OSError:
     pass
 
+
 def user(choice, i):
-    try:
+    #add code to execute users program
+    '''try:
+
         pass   #users program has to be executed
 
     except Exception:
         print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
             LANGS[choice - 1]['req'], LANGS[choice - 1]['link']))
+   '''
 
 
 
@@ -62,7 +66,11 @@ def main():
     res=0
     for i in range(0,t+1):
         m=generate(4,i)
+
         n=user(4,i)  #this function will execute users logic.
+
+        
+
         if m==n:res+=score
      # if assertion failed it will fail for the given testcase
      #f.close()
