@@ -23,7 +23,7 @@ if sys.version[0] == '3':
 
 try:
     os.mkdir('input')
-    os.mkdir('output')
+    
 except OSError:
     pass
 
@@ -41,7 +41,7 @@ def main():
 
     for i in XRange(0, test_files + 1):
         print('Generating:', i, file=sys.stderr)
-        sys.stdout = open('input2/input%02d.txt' % i, 'w')
+        sys.stdout = open('input/input%02d.txt' % i, 'w')
 
         '''
         Input area will start here,
