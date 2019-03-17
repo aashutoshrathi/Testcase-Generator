@@ -51,7 +51,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 ```
 ### How it Works ? 🤔
 
-![Demo](demo.gif)
+![Demo](demo2.gif)
 
 ## Stargazers over time 📈
 
