@@ -26,7 +26,7 @@ RINT = random.randint
 
 def generate(choice, i):
     try:
-        os.system('%s < input%02d.txt > output%02d.txt' % (LANGS[choice - 1]['command'], i, i))
+        os.system('%s < %02dinput.txt > %02doutput.txt' % (LANGS[choice - 1]['command'], i, i))
 
     except Exception:
         print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
@@ -48,8 +48,8 @@ def zip_them(test_files, choice):
             print('Time taken to execute this TC %02f seconds' %
                   (exe_time), file=sys.stderr)
 
-            zip_file.write('input%02d.txt' % i)
-            zip_file.write('output%02d.txt' % i)
+            zip_file.write('%02dinput.txt' % i)
+            zip_file.write('%02doutput.txt' % i)
 
 
 def main():
@@ -63,7 +63,7 @@ def main():
 
     for i in XRange(0, test_files + 1):
         print('Generating:', i, file=sys.stderr)
-        sys.stdout = open('input%02d.txt' % i, 'w')
+        sys.stdout = open('%02dinput.txt' % i, 'w')
 
         '''
         Input area will start here,
@@ -81,11 +81,11 @@ def main():
         # Input File Printing Ends
     compile_them(test_files, choice)
 
-    filelist_input=glob.glob('input*.txt')
+    filelist_input=glob.glob('*input.txt')
     for filepath in filelist_input:
         os.remove(filepath)
 
-    filelist_output=glob.glob('output*.txt')
+    filelist_output=glob.glob('*output.txt')
     for filepath in filelist_output:
         os.remove(filepath)
 
