@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server for HackerRank Test Case Generator",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js"
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js"
   },
   "author": "Aashutosh Rathi",
   "license": "MIT",
