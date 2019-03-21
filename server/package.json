@@ -8,12 +8,16 @@
     "server": "nodemon index.js"
   },
   "author": "Aashutosh Rathi",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.4.19"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.io/tcgen"
   }
 }
