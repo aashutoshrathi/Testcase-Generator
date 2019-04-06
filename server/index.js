@@ -6,7 +6,7 @@ const zip = require('./routes/api/zip');
 const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
 const app = express();
-
+var fs = require('fs');
 //Database config goes here
 
 //Database connection goes here
@@ -24,6 +24,10 @@ app.post('/upload', function(req, res) {
 	if (file) {
 		var filename = file.name;
 		var uploadpath = __dirname + '/uploads/' + filename;
+		var dir = __dirname + '/uploads'; //added a check wheteher the directory exists or not
+		if (!fs.existsSync(dir)) {
+			fs.mkdirSync(dir);
+		}
 		file.mv(uploadpath, function(err) {
 			if (err) {
 				console.log('file upload Failed', filename, err);
