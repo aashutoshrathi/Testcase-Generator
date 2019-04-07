@@ -23,7 +23,8 @@ app.post('/upload', function(req, res) {
 	var file = req.files.upfile;
 	if (file) {
 		var filename = file.name;
-		var uploadpath = __dirname + '/uploads/' + filename;
+		var timestamp = new Date().getTime();
+		var uploadpath = __dirname + '/uploads/' + filename + timestamp;
 		var dir = __dirname + '/uploads'; //added a check wheteher the directory exists or not
 		if (!fs.existsSync(dir)) {
 			fs.mkdirSync(dir);
