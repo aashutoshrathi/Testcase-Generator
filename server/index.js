@@ -14,11 +14,11 @@ app.use(upload());
 app.get('/', (req, res) => {
 	res.send('Hello World');
 });
-app.get('/fileupload', function(req, res) {
+app.get('/upload-file', function(req, res) {
 	console.log(__dirname);
 	res.sendFile(__dirname + '/index.html');
 });
-app.post('/upload', function(req, res) {
+app.post('/api/upload', function(req, res) {
 	console.log(req.files);
 	var file = req.files.upfile;
 	if (file) {
