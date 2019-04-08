@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Upload File</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <style>
-    input[type="file"]{
+    input[type="file"] {
         display: none;
     }
+    html,body{
+        height:100%;
+        margin:0;
+        padding:0;
+    }
+    .vertical-center{
+        min-height:100vh;
+        min-height:100%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
+
 <body class="bg-dark">
+    <div class="vertical-center">
     <form class="fileupload" action="upload" method="post" enctype="multipart/form-data">
-        <div class=" bg-white text-dark my-5  p-5 container text-center">
-            <h3 class="text-secondary">Upload your File Here</h3>
-            <div class="row my-3">
-                <div class="col-md-6 d-flex " >
+        <div class=" bg-white text-dark p-5  container text-center">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h3 class="text-secondary">Upload your File Here</h3>
                     <label for="file-upload" class="btn btn-lg align-self-center btn-outline-primary mr-3">
                         Choose File
                     </label>
-                       <p class="mr-3 p-2 preview " >No files currently selected for upload</p>
+                    <p class="mr-3 p-2 preview ">No files currently selected for upload</p>
                     <span class=""></span>
                     <input type="file" id="file-upload" name="upfile" value="">
                 </div>
-                <div class="col-md-6">
-                    <input type="submit" class="btn btn-lg btn-outline-success"/>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-lg btn-outline-success" />
                 </div>
             </div>
         </div>
     </form>
+    </div>
 </body>
 <script>
-    function returnFileSize(number){
-          if (number < 1024) {
+    function returnFileSize(number) {
+        if (number < 1024) {
             return number + 'bytes';
         } else if (number >= 1024 && number < 1048576) {
             return (number / 1024).toFixed(1) + 'KB';
@@ -46,20 +62,21 @@
 
     var input = document.querySelector('input');
     var preview = document.querySelector('.preview');
-    input.addEventListener('change',display);
-    function display(){
+    input.addEventListener('change', display);
+    function display() {
         var curfiles = input.files;
-        if(curfiles.length > 0){
+        if (curfiles.length > 0) {
             var filename = curfiles[0].name;
             var number = curfiles[0].size;
             var filesize = returnFileSize(number);
-            var textContent =  'File name ' + filename + ', file size ' + filesize + '.';
-            preview.innerHTML =  textContent;
+            var textContent = 'File name ' + filename + ', file size ' + filesize + '.';
+            preview.innerHTML = textContent;
             var check = document.querySelector('span');
-            let classes = ['fa','fa-check','text-success','fa-2x']
+            let classes = ['fa', 'fa-check', 'text-success', 'fa-2x']
             check.classList.add(...classes);
-    }
+        }
     }
 </script>
 </head>
+
 </html>
