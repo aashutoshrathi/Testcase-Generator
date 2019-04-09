@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const cors = require('cors');
 
 const compile = require('./routes/api/compile');
 const zip = require('./routes/api/zip');
@@ -10,6 +12,8 @@ var fs = require('fs');
 //Database config goes here
 
 //Database connection goes here
+app.use(cors());
+app.use(helmet());
 app.use(upload());
 app.get('/', (req, res) => {
 	res.send('Hello World');
