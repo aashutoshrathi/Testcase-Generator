@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const cors = require('cors');
 
 const compile = require('./routes/api/compile');
 const zip = require('./routes/api/zip');
@@ -12,6 +14,9 @@ var fs = require('fs');
 const db = require('./config/keys').mongoURI;
 
 //Database connection goes here
+app.use(cors());
+app.use(helmet());
+
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('Database connected'))
