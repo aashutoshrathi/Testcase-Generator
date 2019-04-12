@@ -9,11 +9,19 @@ const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
 const app = express();
 var fs = require('fs');
+
 //Database config goes here
+const db = require('./config/keys').mongoURI;
 
 //Database connection goes here
 app.use(cors());
 app.use(helmet());
+
+mongoose
+	.connect(db, { useNewUrlParser: true })
+	.then(() => console.log('Database connected'))
+	.catch(err => console.log(err));
+
 app.use(upload());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
