@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
-
+const path = require('path');
 const compile = require('./routes/api/compile');
 const zip = require('./routes/api/zip');
 const generate = require('./routes/api/generate');
@@ -15,12 +15,15 @@ var fs = require('fs');
 app.use(cors());
 app.use(helmet());
 app.use(upload());
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
 	res.send('Hello World');
 });
+
 app.get('/upload-file', function(req, res) {
-	console.log(__dirname);
-	res.sendFile(__dirname + '/index.html');
+	res.render('pages/index');
 });
 app.post('/api/upload', function(req, res) {
 	console.log(req.files);
