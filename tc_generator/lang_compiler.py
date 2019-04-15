@@ -5,7 +5,7 @@ cmd = 'logic'
 if platform[0] == 'w':
     pass
 else:
-    cmd = './'+cmd
+    cmd += './'
     LANGS = [{'req': 'gcc',
           'command': cmd,
           'link': 'https://gcc.gnu.org/install/',
