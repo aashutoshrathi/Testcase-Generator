@@ -8,20 +8,24 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <%  include ../components/header   %>
 </head>
 <style>
     input[type="file"] {
         display: none;
     }
-    html,body{
-        height:100%;
-        margin:0;
-        padding:0;
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
-    .vertical-center{
-        min-height:100vh;
-        min-height:100%;
-        display:flex;
+
+    .vertical-center {
+        min-height: 100vh;
+        min-height: 100%;
+        display: flex;
         align-items: center;
         justify-content: center;
     }
@@ -29,26 +33,27 @@
 
 <body class="bg-dark">
     <div class="vertical-center">
-    <form class="fileupload" action="api/upload" method="post" enctype="multipart/form-data">
-        <div class=" bg-white text-dark p-5  container text-center">
-            <div class="row ">
-                <div class="col-md-12">
-                    <h3 class="text-secondary">Upload your File Here</h3>
-                    <label for="file-upload" class="btn btn-lg align-self-center btn-outline-primary mr-3">
-                        Choose File
-                    </label>
-                    <p class="mr-3 p-2 preview ">No files currently selected for upload</p>
-                    <span class=""></span>
-                    <input type="file" id="file-upload" name="upfile" value="">
-                </div>
-                <div class="col-md-12">
-                    <input type="submit" class="btn btn-lg btn-outline-success" />
+        <form class="fileupload" action="api/upload" method="post" enctype="multipart/form-data">
+            <div class=" bg-white text-dark p-5  container text-center">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h3 class="text-secondary">Upload your File Here</h3>
+                        <label for="file-upload" class="btn btn-lg align-self-center btn-outline-primary mr-3">
+                            Choose File
+                        </label>
+                        <p class="mr-3 p-2 preview ">No files currently selected for upload</p>
+                        <span class=""></span>
+                        <input type="file" id="file-upload" name="upfile" value="">
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-lg btn-outline-success" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
 </body>
+<% include ../components/footer %>
 <script>
     function returnFileSize(number) {
         if (number < 1024) {

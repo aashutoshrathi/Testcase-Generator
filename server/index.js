@@ -18,41 +18,44 @@ app.use(cors());
 app.use(helmet());
 
 mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log('Database connected'))
-  .catch(err => console.log(err));
+	.connect(db, { useNewUrlParser: true })
+	.then(() => console.log('Database connected'))
+	.catch(err => console.log(err));
 
 app.use(upload());
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-  res.send('Hello World');
+	res.send('Hello World');
 });
+
 app.get('/upload-file', function(req, res) {
-  console.log(__dirname);
-  res.sendFile(__dirname + '/index.html');
+	res.render('pages/index');
 });
 app.post('/api/upload', function(req, res) {
-  console.log(req.files);
-  var file = req.files.upfile;
-  if (file) {
-    var filename = file.name;
-    var timestamp = new Date().getTime();
-    var uploadpath = __dirname + '/uploads/' + timestamp + '-' + filename;
-    var dir = __dirname + '/uploads'; //added a check wheteher the directory exists or not
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-    file.mv(uploadpath, function(err) {
-      if (err) {
-        console.log('file upload Failed', filename, err);
-        res.send('Error Occured!');
-      } else {
-        console.log('File Uploaded', filename);
-        return res.redirect('/api/compile');
-      }
-    });
-  } else {
-    res.send('Sorry please select the file to upload');
-  }
+	console.log(req.files);
+	var file = req.files.upfile;
+	if (file) {
+		var filename = file.name;
+		var timestamp = new Date().getTime();
+		var uploadpath = __dirname + '/uploads/' + timestamp + '-' + filename;
+		var dir = __dirname + '/uploads'; //added a check wheteher the directory exists or not
+		if (!fs.existsSync(dir)) {
+			fs.mkdirSync(dir);
+		}
+		file.mv(uploadpath, function(err) {
+			if (err) {
+				console.log('file upload Failed', filename, err);
+				res.send('Error Occured!');
+			} else {
+				console.log('File Uploaded', filename);
+				return res.redirect('/api/compile');
+			}
+		});
+	} else {
+		res.send('Sorry please select the file to upload');
+	}
 });
 
 //Compile, generate and zip routes
