@@ -27,7 +27,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-	res.send('Hello World');
+	res.render('pages/landing');
 });
 
 app.get('/upload-file', function(req, res) {
