@@ -1,24 +1,28 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "Server for HackerRank Test Case Generator",
-  "main": "server/index.js",
-  "scripts": {
-    "start": "node server/index.js",
-    "server": "nodemon server/index.js"
-  },
-  "author": "Aashutosh Rathi",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.16.4",
-    "express-fileupload": "^1.1.4",
-    "mongoose": "^5.4.19"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.io/tcgen"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "Server for HackerRank Test Case Generator",
+	"main": "server/index.js",
+	"scripts": {
+		"start": "node server/index.js",
+		"server": "nodemon server/index.js"
+	},
+	"author": "Aashutosh Rathi",
+	"license": "MIT",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"ejs": "^2.6.1",
+		"express": "^4.16.4",
+		"express-fileupload": "^1.1.4",
+		"helmet": "^3.16.0",
+		"mongoose": "^5.4.19"
+	},
+	"devDependencies": {
+		"nodemon": "^1.18.10"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://git.io/tcgen"
+	}
+
 }
