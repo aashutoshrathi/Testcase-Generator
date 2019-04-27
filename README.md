@@ -53,7 +53,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ![Demo](demo2.gif)
 
-### How to Setup a Server?
+### Setup using Docker?
 
 ```sh
   docker build . --tag=tcgen
