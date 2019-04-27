@@ -55,8 +55,10 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ### How to Setup a Server?
 
-docker build . --tag=tcgen
-docker run -p 4000:80 tcgen
+```sh
+  docker build . --tag=tcgen
+  docker run -p 4000:80 tcgen
+```   
 
 ## Stargazers over time 📈
 
