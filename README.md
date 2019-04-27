@@ -53,6 +53,11 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ![Demo](demo2.gif)
 
+### How to Setup a Server?
+
+docker build . --tag=tcgen
+docker run -p 4000:80 tcgen
+
 ## Stargazers over time 📈
 
 [![Stargazers over time](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator.svg)](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator)
