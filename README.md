@@ -53,7 +53,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ![Demo](demo2.gif)
 
-### Setup using Docker?
+### Setup using Docker
 
 ```sh
   docker build . --tag=tcgen
