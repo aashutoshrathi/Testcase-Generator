@@ -1,9 +1,17 @@
-LANGS = [{'req': 'gcc',
-          'command': './logic',
+import sys
+platform = sys.platform
+cmd = 'logic'
+
+if platform[0] == 'w':
+    pass
+else:
+    cmd += './'
+    LANGS = [{'req': 'gcc',
+          'command': cmd,
           'link': 'https://gcc.gnu.org/install/',
           'compile': 'gcc -o logic logic.c'},
          {'req': 'g++',
-          'command': './logic',
+          'command': cmd,
           'link': 'https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/',
           'compile': 'g++ -o logic logic.cpp'},
          {'req': 'Java',
@@ -19,7 +27,7 @@ LANGS = [{'req': 'gcc',
           'link': 'https://www.mono-project.com/docs/about-mono/languages/csharp/',
           'compile': 'msc logic.cs'},
          {'req': 'Golang',
-          'command': './logic',
+          'command': cmd,
           'link': 'https://golang.org/doc/install',
           'compile': 'go build logic.go'},
          ]
