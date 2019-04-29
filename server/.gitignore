@@ -1,2 +1,6 @@
 node_modules
 package-lock.json
+<<<<<<< HEAD
+=======
+server/uploads
+>>>>>>> a1904480f60750b0802a5e66bff12a214f68857a

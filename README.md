@@ -31,7 +31,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 * Clone the repository `$ git clone https://github.com/aashutoshrathi/HackerRank-Test-Case-Generator.git `
 
-* Create a virtual environment `$ virtualenv venv `, 
+* Create a virtual environment `$ virtualenv venv `,
 [click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
 
 * #### Activate virtualenv (Linux)
@@ -43,7 +43,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
    $ cd venv/Scripts/
    $ activate
    $ pip install -r requirements.txt
-```   
+```
 * Go to ```sh tc_generator ``` and run the project.
 ```sh
    $ cd tc_generator/
@@ -52,6 +52,13 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 ### How it Works ? 🤔
 
 ![Demo](demo2.gif)
+
+### Setup using Docker
+
+```sh
+  docker build . --tag=tcgen
+  docker run -p 4000:80 tcgen
+```
 
 ## Stargazers over time 📈
 
