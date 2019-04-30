@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Upload File</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<%  include ../components/header   %>
+ </head>
+
+<body>
+
+<div class="card mx-auto mt-5 pt-5">
+    <div class="card-header text-center text-capitalize">Register with us</div>
+    <div class="card-body">
+        <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="firstName" placeholder="Enter first Name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">Last Name</label>
+                        <input type="text" name="lastName" placeholder="Enter last Name" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">Email</label>
+                <input type="email" name="email" placeholder="Enter your email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="firstName">Password</label>
+                <input type="password" name="password" placeholder="Enter your password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+         </form>
+    </div>
+</div>
+</body>
+</html>

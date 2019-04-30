@@ -7,6 +7,9 @@ const compile = require('./routes/api/compile');
 const zip = require('./routes/api/zip');
 const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
+const bodyParser = require('body-parser');
+
+const User = require('./models/User');
 const app = express();
 var fs = require('fs');
 
@@ -23,6 +26,12 @@ mongoose
 	.catch(err => console.log(err));
 
 app.use(upload());
+
+// Body Parser
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
@@ -57,7 +66,23 @@ app.post('/api/upload', function(req, res) {
 		res.send('Sorry please select the file to upload');
 	}
 });
-
+app.get('/register', function(req, res) {
+	res.render('pages/signup');
+});
+app.post('/register', function(req, res) {
+	const newUser = new User({
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: req.body.password
+	});
+	newUser
+		.save()
+		.then(savedUser => {
+			res.send('success');
+		})
+		.catch(error => console.log(error));
+});
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
 app.use('/api/zip', zip);
