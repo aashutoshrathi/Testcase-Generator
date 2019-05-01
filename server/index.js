@@ -8,6 +8,7 @@ const zip = require('./routes/api/zip');
 const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 
 const User = require('./models/User');
 const app = express();
@@ -76,12 +77,17 @@ app.post('/register', function(req, res) {
 		email: req.body.email,
 		password: req.body.password
 	});
-	newUser
-		.save()
-		.then(savedUser => {
-			res.send('success');
-		})
-		.catch(error => console.log(error));
+	bcrypt.genSalt(10, (error, salt) => {
+		bcrypt.hash(newUser.password, salt, (err, hash) => {
+			newUser.password = hash;
+			newUser
+				.save()
+				.then(savedUser => {
+					res.redirect('/login');
+				})
+				.catch(error => console.log(error));
+		});
+	});
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
