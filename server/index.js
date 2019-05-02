@@ -9,6 +9,8 @@ const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
 
 const User = require('./models/User');
 const app = express();
@@ -33,8 +35,46 @@ app.use(upload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+passport.use(
+	new localStrategy(
+		{
+			usernameField: 'email'
+		},
+		function(email, password, done) {
+			User.findOne({ email: email }, function(err, user) {
+				if (err) {
+					return done(err);
+				}
+				if (!user) {
+					return done(null, false, { message: 'Incorrect username.' });
+				}
+				bcrypt.compare(password, user.password, function(err, matched) {
+					if (err) {
+						return done(err);
+					} else if (matched) {
+						return done(null, user);
+					} else {
+						return done(null, false, { message: 'incorrect password' });
+					}
+				});
+			});
+		}
+	)
+);
+passport.serializeUser(function(user, done) {
+	return done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		return done(err, user);
+	});
+});
 
 app.get('/', (req, res) => {
 	res.render('pages/landing');
@@ -88,6 +128,15 @@ app.post('/register', function(req, res) {
 				.catch(error => console.log(error));
 		});
 	});
+});
+app.get('/login', (req, res) => {
+	res.render('pages/login');
+});
+app.post('/login', (req, res, done) => {
+	passport.authenticate('local', {
+		failureRedirect: '/login',
+		successRedirect: '/'
+	})(req, res, done);
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);

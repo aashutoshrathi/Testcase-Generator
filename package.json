@@ -17,7 +17,9 @@
 		"express": "^4.16.4",
 		"express-fileupload": "^1.1.4",
 		"helmet": "^3.16.0",
-		"mongoose": "^5.4.19"
+		"mongoose": "^5.4.19",
+		"passport": "^0.4.0",
+		"passport-local": "^1.0.0"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.10"
