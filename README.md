@@ -58,7 +58,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 ```sh
   docker build . --tag=tcgen
   docker run -p 4000:80 tcgen
-```   
+```
 
 ## Stargazers over time 📈
 
