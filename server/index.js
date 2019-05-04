@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
+const expressValidator = require('express-validator');
+const expressSession = require('express-session');
 
 const User = require('./models/User');
 const app = express();
@@ -35,8 +37,18 @@ app.use(upload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(expressValidator());
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(
+	expressSession({
+		secret: 'ilovecoding',
+		saveUninitialized: true,
+		resave: true
+	})
+);
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -108,26 +120,42 @@ app.post('/api/upload', function(req, res) {
 	}
 });
 app.get('/register', function(req, res) {
-	res.render('pages/signup');
+	res.render('pages/signup', {
+		errors: req.session.errors
+	});
+	//resetting session properties to null
+	req.session.errors = null;
 });
 app.post('/register', function(req, res) {
-	const newUser = new User({
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		password: req.body.password
-	});
-	bcrypt.genSalt(10, (error, salt) => {
-		bcrypt.hash(newUser.password, salt, (err, hash) => {
-			newUser.password = hash;
-			newUser
-				.save()
-				.then(savedUser => {
-					res.redirect('/login');
-				})
-				.catch(error => console.log(error));
+	req.check('firstName', 'First name is required').notEmpty();
+	req.check('lastName', 'Last Name required').notEmpty();
+	req.check('email', 'Invalid email address').isEmail();
+	req.check('password', 'Password is invalid must be of length 6').isLength({ min: 6 });
+	req.check('password', 'Passwords are not matching').equals(req.body.confirmPassword);
+
+	let errors = req.validationErrors();
+	if (errors) {
+		req.session.errors = errors;
+		res.redirect('/register');
+	} else {
+		const newUser = new User({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password
 		});
-	});
+		bcrypt.genSalt(10, (error, salt) => {
+			bcrypt.hash(newUser.password, salt, (err, hash) => {
+				newUser.password = hash;
+				newUser
+					.save()
+					.then(savedUser => {
+						res.redirect('/login');
+					})
+					.catch(error => console.log(error));
+			});
+		});
+	}
 });
 app.get('/login', (req, res) => {
 	res.render('pages/login');
