@@ -7,6 +7,14 @@ const compile = require('./routes/api/compile');
 const zip = require('./routes/api/zip');
 const generate = require('./routes/api/generate');
 const upload = require('express-fileupload');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const expressValidator = require('express-validator');
+const expressSession = require('express-session');
+
+const User = require('./models/User');
 const app = express();
 var fs = require('fs');
 
@@ -23,8 +31,62 @@ mongoose
 	.catch(err => console.log(err));
 
 app.use(upload());
+
+// Body Parser
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(expressValidator());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(
+	expressSession({
+		secret: 'ilovecoding',
+		saveUninitialized: true,
+		resave: true
+	})
+);
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+passport.use(
+	new localStrategy(
+		{
+			usernameField: 'email'
+		},
+		function(email, password, done) {
+			User.findOne({ email: email }, function(err, user) {
+				if (err) {
+					return done(err);
+				}
+				if (!user) {
+					return done(null, false, { message: 'Incorrect username.' });
+				}
+				bcrypt.compare(password, user.password, function(err, matched) {
+					if (err) {
+						return done(err);
+					} else if (matched) {
+						return done(null, user);
+					} else {
+						return done(null, false, { message: 'incorrect password' });
+					}
+				});
+			});
+		}
+	)
+);
+passport.serializeUser(function(user, done) {
+	return done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		return done(err, user);
+	});
+});
 
 app.get('/', (req, res) => {
 	res.render('pages/landing');
@@ -57,7 +119,53 @@ app.post('/api/upload', function(req, res) {
 		res.send('Sorry please select the file to upload');
 	}
 });
+app.get('/register', function(req, res) {
+	res.render('pages/signup', {
+		errors: req.session.errors
+	});
+	//resetting session properties to null
+	req.session.errors = null;
+});
+app.post('/register', function(req, res) {
+	req.check('firstName', 'First name is required').notEmpty();
+	req.check('lastName', 'Last Name required').notEmpty();
+	req.check('email', 'Invalid email address').isEmail();
+	req.check('password', 'Password is invalid must be of length 6').isLength({ min: 6 });
+	req.check('password', 'Passwords are not matching').equals(req.body.confirmPassword);
 
+	let errors = req.validationErrors();
+	if (errors) {
+		req.session.errors = errors;
+		res.redirect('/register');
+	} else {
+		const newUser = new User({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password
+		});
+		bcrypt.genSalt(10, (error, salt) => {
+			bcrypt.hash(newUser.password, salt, (err, hash) => {
+				newUser.password = hash;
+				newUser
+					.save()
+					.then(savedUser => {
+						res.redirect('/login');
+					})
+					.catch(error => console.log(error));
+			});
+		});
+	}
+});
+app.get('/login', (req, res) => {
+	res.render('pages/login');
+});
+app.post('/login', (req, res, done) => {
+	passport.authenticate('local', {
+		failureRedirect: '/login',
+		successRedirect: '/'
+	})(req, res, done);
+});
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
 app.use('/api/zip', zip);

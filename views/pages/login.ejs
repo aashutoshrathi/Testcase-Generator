@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <%  include ../components/header   %>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .vertical-center {
+            min-height: 100vh;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <div class="vertical-center">
+        <div class="card mt-5 mx-auto p-2 bg-white" style="width:75%">
+            <div class="card-header text-center">Login</div>
+            <div class="card-body">
+                <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%include ../components/footer%>
+</html>

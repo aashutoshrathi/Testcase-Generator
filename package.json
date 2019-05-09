@@ -10,12 +10,18 @@
 	"author": "Aashutosh Rathi",
 	"license": "MIT",
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
 		"ejs": "^2.6.1",
 		"express": "^4.16.4",
 		"express-fileupload": "^1.1.4",
+		"express-session": "^1.16.1",
+		"express-validator": "^5.3.1",
 		"helmet": "^3.16.0",
-		"mongoose": "^5.4.19"
+		"mongoose": "^5.4.19",
+		"passport": "^0.4.0",
+		"passport-local": "^1.0.0"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.10"
