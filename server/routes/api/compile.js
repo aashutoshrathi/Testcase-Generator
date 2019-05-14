@@ -2,10 +2,12 @@ const express = require('express');
 
 const router = express.Router();
 
+const { authenticated } = require('../../helpers/authentication');
+
 // @route api/compile
 // @desc For now test route
 // @access Public
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
 	const { spawnSync } = require('child_process');
 	const pythonScript = spawnSync('python3', ['tc_generator/tc_gen.py', '4']);
 

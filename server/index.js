@@ -13,6 +13,9 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
+const cookieParser = require('cookie-parser');
+
+const { authenticated } = require('./helpers/authentication');
 
 const User = require('./models/User');
 const app = express();
@@ -38,17 +41,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(expressValidator());
-
-app.use(passport.initialize());
-app.use(passport.session());
-
+app.use(cookieParser());
 app.use(
 	expressSession({
 		secret: 'ilovecoding',
 		saveUninitialized: true,
-		resave: true
+		resave: true,
+		cookie: {
+			maxAge: 3600 * 1000
+		}
 	})
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -92,7 +97,7 @@ app.get('/', (req, res) => {
 	res.render('pages/landing');
 });
 
-app.get('/upload-file', function(req, res) {
+app.get('/upload-file', authenticated, function(req, res) {
 	res.render('pages/index');
 });
 app.post('/api/upload', function(req, res) {
@@ -120,9 +125,13 @@ app.post('/api/upload', function(req, res) {
 	}
 });
 app.get('/register', function(req, res) {
-	res.render('pages/signup', {
-		errors: req.session.errors
-	});
+	if (req.user) {
+		res.redirect('/');
+	} else {
+		res.render('pages/signup', {
+			errors: req.session.errors
+		});
+	}
 	//resetting session properties to null
 	req.session.errors = null;
 });
@@ -158,7 +167,11 @@ app.post('/register', function(req, res) {
 	}
 });
 app.get('/login', (req, res) => {
-	res.render('pages/login');
+	if (req.user) {
+		return res.redirect('/');
+	} else {
+		res.render('pages/login');
+	}
 });
 app.post('/login', (req, res, done) => {
 	passport.authenticate('local', {
