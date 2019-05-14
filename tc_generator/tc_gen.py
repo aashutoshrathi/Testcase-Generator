@@ -55,20 +55,21 @@ def zip_them(test_files, choice):
                 exe_command, globals=globals(), number=1)
             print('Time taken to execute this TC %02f seconds' %
                   (exe_time), file=sys.stderr)
-            f=open('output/output%02d.txt' % i,'rt')
+            f = open('output/output%02d.txt' % i, 'rt')
             try:
-            	if f.read() is '' :
-            		raise Exception ('blank output file')
-            except Exception as error :
-            	print(repr(error))
-            f.close()		
+                if f.read() is '':
+                    raise Exception('blank output file')
+            except Exception as error:
+                print(repr(error))
+            f.close()
             zip_file.write('input/input%02d.txt' % i)
             zip_file.write('output/output%02d.txt' % i)
 
 
 def main():
-    choice = int(INPUT(
-        "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
+    '''choice = int(INPUT(
+        "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))'''
+    choice = int(sys.argv[1])
     if choice not in range(1, 7):
         print("Wrong choice entered!")
         exit()
