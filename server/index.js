@@ -13,6 +13,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
+const { authenticated } = require('./helpers/authentication');
 
 const User = require('./models/User');
 const app = express();
@@ -165,6 +166,10 @@ app.post('/login', (req, res, done) => {
 		failureRedirect: '/login',
 		successRedirect: '/'
 	})(req, res, done);
+});
+app.get('/logout', authenticated, (req, res) => {
+	req.logout();
+	res.redirect('/');
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
