@@ -15,6 +15,7 @@ const expressValidator = require('express-validator');
 const expressSession = require('express-session');
 
 const User = require('./models/User');
+const File = require('./models/Files');
 const app = express();
 var fs = require('fs');
 
@@ -39,9 +40,6 @@ app.use(bodyParser.json());
 
 app.use(expressValidator());
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(
 	expressSession({
 		secret: 'ilovecoding',
@@ -49,6 +47,9 @@ app.use(
 		resave: true
 	})
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -165,6 +166,23 @@ app.post('/login', (req, res, done) => {
 		failureRedirect: '/login',
 		successRedirect: '/'
 	})(req, res, done);
+});
+//get the uploaded files
+app.get('/uploaded-files', (req, res) => {
+	File.find({
+		user: req.user.id
+	}).then(files => {
+		console.log(files);
+		res.render('pages/files', {
+			files: files
+		});
+	});
+});
+//get selected file
+app.get('/download/:id', (req, res) => {
+	var filepath = 'server/uploads/' + req.params.id;
+	var filename = req.params.id;
+	res.download(filepath, filename);
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
