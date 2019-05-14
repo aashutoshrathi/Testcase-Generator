@@ -5,6 +5,7 @@ const router = express.Router();
 // @route api/zip
 // @desc For now test route
 // @access Public
+const fs = require('fs');
 router.get('/', (req, res) => {
 	var path = './test-cases.zip';
 	res.writeHead(200, { 'content-type': 'application/zip' });
