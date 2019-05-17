@@ -13,10 +13,10 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
+
 const cookieParser = require('cookie-parser');
 
 const { authenticated } = require('./helpers/authentication');
-
 const User = require('./models/User');
 const app = express();
 var fs = require('fs');
@@ -29,7 +29,9 @@ app.use(cors());
 app.use(helmet());
 
 mongoose
-	.connect(db, { useNewUrlParser: true })
+	.connect(db, {
+		useNewUrlParser: true
+	})
 	.then(() => console.log('Database connected'))
 	.catch(err => console.log(err));
 
@@ -37,7 +39,9 @@ app.use(upload());
 
 // Body Parser
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 app.use(bodyParser.json());
 
 app.use(expressValidator());
@@ -59,36 +63,41 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 passport.use(
-	new localStrategy(
-		{
+	new localStrategy({
 			usernameField: 'email'
 		},
-		function(email, password, done) {
-			User.findOne({ email: email }, function(err, user) {
+		function (email, password, done) {
+			User.findOne({
+				email: email
+			}, function (err, user) {
 				if (err) {
 					return done(err);
 				}
 				if (!user) {
-					return done(null, false, { message: 'Incorrect username.' });
+					return done(null, false, {
+						message: 'Incorrect username.'
+					});
 				}
-				bcrypt.compare(password, user.password, function(err, matched) {
+				bcrypt.compare(password, user.password, function (err, matched) {
 					if (err) {
 						return done(err);
 					} else if (matched) {
 						return done(null, user);
 					} else {
-						return done(null, false, { message: 'incorrect password' });
+						return done(null, false, {
+							message: 'incorrect password'
+						});
 					}
 				});
 			});
 		}
 	)
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
 	return done(null, user.id);
 });
-passport.deserializeUser(function(id, done) {
-	User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+	User.findById(id, function (err, user) {
 		return done(err, user);
 	});
 });
@@ -100,7 +109,7 @@ app.get('/', (req, res) => {
 app.get('/upload-file', authenticated, function(req, res) {
 	res.render('pages/index');
 });
-app.post('/api/upload', function(req, res) {
+app.post('/api/upload', function (req, res) {
 	console.log(req.files);
 	var file = req.files.upfile;
 	if (file) {
@@ -111,7 +120,7 @@ app.post('/api/upload', function(req, res) {
 		if (!fs.existsSync(dir)) {
 			fs.mkdirSync(dir);
 		}
-		file.mv(uploadpath, function(err) {
+		file.mv(uploadpath, function (err) {
 			if (err) {
 				console.log('file upload Failed', filename, err);
 				res.send('Error Occured!');
@@ -124,6 +133,7 @@ app.post('/api/upload', function(req, res) {
 		res.send('Sorry please select the file to upload');
 	}
 });
+
 app.get('/register', function(req, res) {
 	if (req.user) {
 		res.redirect('/');
@@ -135,11 +145,13 @@ app.get('/register', function(req, res) {
 	//resetting session properties to null
 	req.session.errors = null;
 });
-app.post('/register', function(req, res) {
+app.post('/register', function (req, res) {
 	req.check('firstName', 'First name is required').notEmpty();
 	req.check('lastName', 'Last Name required').notEmpty();
 	req.check('email', 'Invalid email address').isEmail();
-	req.check('password', 'Password is invalid must be of length 6').isLength({ min: 6 });
+	req.check('password', 'Password is invalid must be of length 6').isLength({
+		min: 6
+	});
 	req.check('password', 'Passwords are not matching').equals(req.body.confirmPassword);
 
 	let errors = req.validationErrors();
@@ -178,6 +190,10 @@ app.post('/login', (req, res, done) => {
 		failureRedirect: '/login',
 		successRedirect: '/'
 	})(req, res, done);
+});
+app.post('/logout', authenticated, (req, res) => {
+	req.logout();
+	res.redirect('/');
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
