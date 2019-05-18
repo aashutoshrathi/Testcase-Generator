@@ -1,12 +1,12 @@
-const express = require("express");
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 // @route api/zip
 // @desc For now test route
 // @access Public
-router.get("/", (req, res) => {
-  res.send("Zip Works");
-});
+router.get('/', (req, res) => {
+  res.send('Zip Works')
+})
 
-module.exports = router;
+module.exports = router
