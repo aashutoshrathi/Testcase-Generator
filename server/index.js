@@ -13,10 +13,10 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
+
 const cookieParser = require('cookie-parser');
 
 const { authenticated } = require('./helpers/authentication');
-
 const User = require('./models/User');
 const File = require('./models/Files');
 const app = express();
@@ -136,6 +136,7 @@ app.post('/api/upload', function (req, res) {
 		res.send('Sorry please select the file to upload');
 	}
 });
+
 app.get('/register', function(req, res) {
 	if (req.user) {
 		res.redirect('/');
@@ -208,6 +209,10 @@ app.get('/download/:id', (req, res) => {
 	var filepath = 'server/uploads/' + req.params.id;
 	var filename = req.params.id;
 	res.download(filepath, filename);
+});
+app.post('/logout', authenticated, (req, res) => {
+	req.logout();
+	res.redirect('/');
 });
 //Compile, generate and zip routes
 app.use('/api/compile', compile);
