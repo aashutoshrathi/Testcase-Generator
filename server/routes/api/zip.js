@@ -5,6 +5,7 @@ const { authenticated } = require('../../helpers/authentication');
 // @route api/zip
 // @desc For now test route
 // @access Public
+
 router.get('/', authenticated, (req, res) => {
 	var path = './test-cases.zip';
 	res.writeHead(200, { 'content-type': 'application/zip' });

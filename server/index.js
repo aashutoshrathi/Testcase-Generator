@@ -18,6 +18,7 @@ const cookieParser = require('cookie-parser');
 
 const { authenticated } = require('./helpers/authentication');
 const User = require('./models/User');
+const File = require('./models/Files');
 const app = express();
 var fs = require('fs');
 
@@ -56,6 +57,9 @@ app.use(
 		}
 	})
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -105,7 +109,6 @@ passport.deserializeUser(function (id, done) {
 app.get('/', (req, res) => {
 	res.render('pages/landing');
 });
-
 app.get('/upload-file', authenticated, function(req, res) {
 	res.render('pages/index');
 });
@@ -190,6 +193,22 @@ app.post('/login', (req, res, done) => {
 		failureRedirect: '/login',
 		successRedirect: '/'
 	})(req, res, done);
+});
+//get the uploaded files
+app.get('/uploaded-files', (req, res) => {
+	File.find({
+		user: req.user.id
+	}).then(files => {
+		res.render('pages/files', {
+			files: files
+		});
+	});
+});
+//get selected file
+app.get('/download/:id', (req, res) => {
+	var filepath = 'server/uploads/' + req.params.id;
+	var filename = req.params.id;
+	res.download(filepath, filename);
 });
 app.post('/logout', authenticated, (req, res) => {
 	req.logout();
