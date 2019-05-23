@@ -6,3 +6,4 @@ install:
   - pip install -r requirements.txt
 script:
   - echo "Hello Travis"
+  - npm run lint
