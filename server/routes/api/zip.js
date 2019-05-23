@@ -2,6 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 const { authenticated } = require('../../helpers/authentication')
+const fs = require('fs')
 // @route api/zip
 // @desc For now test route
 // @access Public

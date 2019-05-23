@@ -10,18 +10,18 @@ const upload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const localStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy
 const expressValidator = require('express-validator')
 const expressSession = require('express-session')
 
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 
 const { authenticated } = require('./helpers/authentication')
 const User = require('./models/User')
 const File = require('./models/Files')
 const app = express()
 var fs = require('fs')
-
+const path = require('path')
 // Database config goes here
 const db = require('./config/keys').mongoURI
 
@@ -58,7 +58,7 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 passport.use(
-  new localStrategy(
+  new LocalStrategy(
     {
       usernameField: 'email'
     },
@@ -104,8 +104,11 @@ app.post('/api/upload', function (req, res) {
   if (file) {
     var filename = file.name
     var timestamp = new Date().getTime()
-    var uploadpath = __dirname + '/uploads/' + timestamp + '-' + filename
-    var dir = __dirname + '/uploads' // added a check wheteher the directory exists or not
+    var uploadpath = path.join(
+      __dirname,
+      '/uploads/' + timestamp + '-' + filename
+    )
+    var dir = path.join(__dirname, '/uploads') // added a check wheteher the directory exists or not
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir)
     }
@@ -151,16 +154,18 @@ app.post('/register', function (req, res) {
       email: req.body.email,
       password: req.body.password
     })
-    bcrypt.genSalt(10, (error, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        newUser.password = hash
-        newUser
-          .save()
-          .then(savedUser => {
-            res.redirect('/login')
-          })
-          .catch(error => console.log(error))
-      })
+    bcrypt.genSalt(10, (_error, salt) => {
+      bcrypt
+        .hash(newUser.password, salt, (_err, hash) => {
+          newUser.password = hash
+          newUser
+            .save()
+            .then(savedUser => {
+              res.redirect('/login')
+            })
+            .catch(_err => console.log(_err))
+        })
+        .catch(_error => console.log(_error))
     })
   }
 })
