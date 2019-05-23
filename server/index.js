@@ -1,33 +1,33 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const helmet = require('helmet');
-const cors = require('cors');
+const express = require('express')
+const mongoose = require('mongoose')
+const helmet = require('helmet')
+const cors = require('cors')
 
-const compile = require('./routes/api/compile');
-const zip = require('./routes/api/zip');
-const generate = require('./routes/api/generate');
-const upload = require('express-fileupload');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
-const expressValidator = require('express-validator');
-const expressSession = require('express-session');
+const compile = require('./routes/api/compile')
+const zip = require('./routes/api/zip')
+const generate = require('./routes/api/generate')
+const upload = require('express-fileupload')
+const bodyParser = require('body-parser')
+const bcrypt = require('bcryptjs')
+const passport = require('passport')
+const localStrategy = require('passport-local').Strategy
+const expressValidator = require('express-validator')
+const expressSession = require('express-session')
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser')
 
-const { authenticated } = require('./helpers/authentication');
-const User = require('./models/User');
-const File = require('./models/Files');
-const app = express();
-var fs = require('fs');
+const { authenticated } = require('./helpers/authentication')
+const User = require('./models/User')
+const File = require('./models/Files')
+const app = express()
+var fs = require('fs')
 
-//Database config goes here
-const db = require('./config/keys').mongoURI;
+// Database config goes here
+const db = require('./config/keys').mongoURI
 
-//Database connection goes here
-app.use(cors());
-app.use(helmet());
+// Database connection goes here
+app.use(cors())
+app.use(helmet())
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('Database connected'))
@@ -42,20 +42,20 @@ app.use(bodyParser.json())
 app.use(expressValidator())
 
 app.use(
-	expressSession({
-		secret: 'ilovecoding',
-		saveUninitialized: true,
-		resave: true,
-		cookie: {
-			maxAge: 3600 * 1000
-		}
-	})
-);
-app.use(passport.initialize());
-app.use(passport.session());
+  expressSession({
+    secret: 'ilovecoding',
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+      maxAge: 3600 * 1000
+    }
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
+app.use(express.static('public'))
+app.set('view engine', 'ejs')
 
 passport.use(
   new localStrategy(
@@ -93,11 +93,11 @@ passport.deserializeUser(function (id, done) {
 })
 
 app.get('/', (req, res) => {
-	res.render('pages/landing');
-});
-app.get('/upload-file', authenticated, function(req, res) {
-	res.render('pages/index');
-});
+  res.render('pages/landing')
+})
+app.get('/upload-file', authenticated, function (req, res) {
+  res.render('pages/index')
+})
 app.post('/api/upload', function (req, res) {
   console.log(req.files)
   var file = req.files.upfile
@@ -168,36 +168,36 @@ app.get('/login', (req, res) => {
   res.render('pages/login')
 })
 app.post('/login', (req, res, done) => {
-	passport.authenticate('local', {
-		failureRedirect: '/login',
-		successRedirect: '/'
-	})(req, res, done);
-});
-//get the uploaded files
+  passport.authenticate('local', {
+    failureRedirect: '/login',
+    successRedirect: '/'
+  })(req, res, done)
+})
+// get the uploaded files
 app.get('/uploaded-files', (req, res) => {
-	File.find({
-		user: req.user.id
-	}).then(files => {
-		res.render('pages/files', {
-			files: files
-		});
-	});
-});
-//get selected file
+  File.find({
+    user: req.user.id
+  }).then(files => {
+    res.render('pages/files', {
+      files: files
+    })
+  })
+})
+// get selected file
 app.get('/download/:id', (req, res) => {
-	var filepath = 'server/uploads/' + req.params.id;
-	var filename = req.params.id;
-	res.download(filepath, filename);
-});
+  var filepath = 'server/uploads/' + req.params.id
+  var filename = req.params.id
+  res.download(filepath, filename)
+})
 app.post('/logout', authenticated, (req, res) => {
-	req.logout();
-	res.redirect('/');
-});
-//Compile, generate and zip routes
-app.use('/api/compile', compile);
-app.use('/api/zip', zip);
-app.use('/api/generate', generate);
+  req.logout()
+  res.redirect('/')
+})
+// Compile, generate and zip routes
+app.use('/api/compile', compile)
+app.use('/api/zip', zip)
+app.use('/api/generate', generate)
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`))
