@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<%  include ../components/header   %>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .vertical-center {
+        min-height: 100vh;
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+</style>
+ </head>
+<body class="bg-dark">
+    <div class="vertical-center">
+        <div class="card mx-auto mt-5 pt-5" style="width: 75%">
+            <% if(errors) { %>
+            <% errors.forEach(function(errors){ %>
+            <div class="alert alert-danger"><%= errors.msg %></div>
+            <% }) %>
+            <% } %>
+            <div class="card-header text-center text-capitalize">Register with us</div>
+            <div class="card-body">
+                <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first Name"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" name="lastName" id="lastName" placeholder="Enter last Name"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+                            placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<% include ../components/footer %>
+</html>
