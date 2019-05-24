@@ -155,8 +155,10 @@ app.post('/register', function (req, res) {
       password: req.body.password
     })
     bcrypt.genSalt(10, (_error, salt) => {
-      bcrypt
-        .hash(newUser.password, salt, (_err, hash) => {
+      if (_error) {
+        console.log(_error)
+      } else {
+        bcrypt.hash(newUser.password, salt, (_err, hash) => {
           newUser.password = hash
           newUser
             .save()
@@ -165,7 +167,7 @@ app.post('/register', function (req, res) {
             })
             .catch(_err => console.log(_err))
         })
-        .catch(_error => console.log(_error))
+      }
     })
   }
 })
