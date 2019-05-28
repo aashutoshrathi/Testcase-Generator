@@ -15,7 +15,10 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run lint-fix", "git add"]
+    "*.js": [
+      "npm run lint-fix",
+      "git add"
+    ]
   },
   "author": "Aashutosh Rathi",
   "license": "MIT",
