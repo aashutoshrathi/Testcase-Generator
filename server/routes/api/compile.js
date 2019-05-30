@@ -19,4 +19,8 @@ router.get('/', authenticated, (req, res) => {
   }
   res.redirect('/api/zip')
 })
+
+router.get('/options', authenticated, (req, res) => {
+  res.render('pages/form')
+})
 module.exports = router

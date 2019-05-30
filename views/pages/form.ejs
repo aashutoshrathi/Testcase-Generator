@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Upload File</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <%  include ../components/header   %>
+</head>
+
+<body class="bg-dark">
+    <div class="container mt-5 py-5">
+        <div class="row text-center">
+            <h3 class="display-4 text-success">Customize your input files and we will generate output files for you</h3>
+        </div>
+    </div>
+    <div class="container mt-4 pt-4">
+        <div class="row text-white">
+            <form class="mx-auto" action="" method="post">
+                <div class="form-group">
+                    <label for="language_choice">
+                        <h5>Please select the language of your uploaded file</h5>
+                    </label>
+                    <select class="form-control" id="language_choice">
+                        <option value="1">C</option>
+                        <option value="2">C++</option>
+                        <option value="3">Java</option>
+                        <option value="4">Python</option>
+                        <option value="5">C#</option>
+                        <option value="6">Go</option>
+                    </select>
+                </div>
+                <div class="form-group mt-4 p-4">
+                    <label class="mr-4" for="no">
+                        <h5>Enter the no of test files you want to generate</h5>
+                    </label>
+                    <input type="number" id="no">
+                </div>
+                <h5>Enter the minimum and maximum number of test cases in your test files</h5>
+                <div class="form-group d-flex flex-row mt-4 p-4">
+                    <div class="mr-3">
+                        <label for="" class="mr-3">
+                            <h5>Minimum value</h5>
+                        </label>
+                        <input type="number" name="" id="">
+                    </div>
+                    <div>
+                        <label for="" class="mr-3">
+                            <h5>Maximum value</h5>
+                        </label>
+                        <input type="number" name="" id="">
+                    </div>
+                </div>
+                <h5>Enter the input range that you want for every input in the test case</h5>
+                <div class="form-group d-flex flex-row mt-4 p-4">
+                    <div class="mr-3">
+                        <label for="" class="mr-3">
+                            <h5>Minimum value</h5>
+                        </label>
+                        <input type="number" name="" id="">
+                    </div>
+                    <div>
+                        <label for="" class="mr-3">
+                            <h5>Maximum value</h5>
+                        </label>
+                        <input type="number" name="" id="">
+                    </div>
+                </div>
+                <button class="btn btn-block btn-success p-2 mb-1" type="submit">Generate input and output
+                    files</button>
+            </form>
+        </div>
+    </div>
+    <% include ../components/footer %>
+</body>
