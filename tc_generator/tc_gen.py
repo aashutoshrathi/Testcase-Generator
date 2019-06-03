@@ -33,17 +33,24 @@ RINT = random.randint
 
 def generate(choice, i):
     try:
-        os.system('%s < input/input%02d.txt > output/output%02d.txt' %
-                  (LANGS[choice - 1]['command'], i, i))
-
+        if platform.system()=='Linux' or platform.system()=='Darwin':
+            os.system('%s < input/input%02d.txt > output/output%02d.txt' %
+                      (LANGS[choice - 1]['commandL'], i, i))
+        elif platform.system()=='Windows':
+            os.system('%s < input/input%02d.txt > output/output%02d.txt' %
+                      (LANGS[choice - 1]['commandW'], i, i))
     except Exception:
         print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
             LANGS[choice - 1]['req'], LANGS[choice - 1]['link']))
 
 
 def compile_them(test_files, choice):
-    if os.system(LANGS[choice - 1]['compile']) == 0:
-        zip_them(test_files, choice)
+    if platform.system()=='Linux' or platform.system()=='Darwin':
+        if os.system(LANGS[choice - 1]['compileL']) == 0:
+            zip_them(test_files, choice)
+    elif platform.system()=='Windows':
+        if os.system(LANGS[choice - 1]['compileW']) == 0:
+            zip_them(test_files, choice)
 
 
 def zip_them(test_files, choice):
