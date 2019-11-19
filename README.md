@@ -1,9 +1,8 @@
-# HackerRank Test Case Generator
+# Testcase Generator
 
 [<img src="https://image.flaticon.com/icons/svg/180/180867.svg" align="right" width="100">](#)
-[<img src="https://brandfolder.com/hackerrank/logo/hackerrank-primary-logo.png" align="right" width="100">](https://www.hackerrank.com/)
 
-[![](https://img.shields.io/travis/aashutoshrathi/HackerRank-Test-Case-Generator/master.svg?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/HackerRank-Test-Case-Generator)
+[![](https://img.shields.io/travis/aashutoshrathi/HackerRank-Test-Case-Generator/master.svg?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
 
 One Click Test Case Generation for HackerRank Problems.
 
@@ -53,9 +52,16 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 ![Demo](demo2.gif)
 
+### Setup using Docker
+
+```sh
+  docker build . --tag=tcgen
+  docker run -p 4000:80 tcgen
+```
+
 ## Stargazers over time 📈
 
-[![Stargazers over time](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator.svg)](https://starcharts.herokuapp.com/aashutoshrathi/HackerRank-Test-Case-Generator)
+[![Stargazers over time](https://starcharts.herokuapp.com/aashutoshrathi/Testcase-Generator.svg)](https://starcharts.herokuapp.com/aashutoshrathi/Testcase-Generator)
 
 
 <p align="center"> Made with ❤ by <a href="https://github.com/aashutoshrathi">Aashutosh Rathi</a></p>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <%  include ../components/header   %>
+</head>
+
+<body>
+    <div class="container mt-5 p-5">
+        <% files.forEach(function(file){ %>
+        <div class=" p-2 d-flex justify-content-between  border border-dark col-md-12 m-2">
+            <p class="text-primary"><%= file.file %></p>
+            <button class="btn btn-success">Download</button>
+        </div>
+        <%}) %>
+    </div>
+</body>

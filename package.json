@@ -1,0 +1,56 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for HackerRank Test Case Generator",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js",
+    "lint": "eslint '**/*.js'",
+    "lint-fix": "prettier-eslint '**/*.js' --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint-fix",
+      "git add"
+    ]
+  },
+  "author": "Aashutosh Rathi",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "express-session": "^1.16.1",
+    "express-validator": "^6.1.1",
+    "helmet": "^3.16.0",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.0.2",
+    "nodemon": "^1.18.10",
+    "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.io/tcgen"
+  }
+}
