@@ -43,11 +43,12 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
    $ activate
    $ pip install -r requirements.txt
 ```   
-* Go to ```sh tc_generator ``` and run the project.
+* Go to ```tc_generator ``` and run the project.
 ```sh
    $ cd tc_generator/
-   $ python tc_gen.py
+   $ python tc_gen.py <choice>
 ```
+- Enter 1 for  C, 2 for C++, 3 for Java, 4 for  Python, 5 for C# or 6 for Go in the \<choice> above
 ### How it Works ? 🤔
 
 ![Demo](demo2.gif)

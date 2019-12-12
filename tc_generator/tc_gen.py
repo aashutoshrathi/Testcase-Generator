@@ -6,6 +6,7 @@ Testcase Generator for HackerRank
 '''
 from __future__ import print_function
 
+import math
 import os
 import random
 import shutil
@@ -13,9 +14,9 @@ import sys
 import timeit
 import zipfile
 
-import math
-
 from lang_compiler import LANGS
+
+platform = sys.platform
 
 if sys.version[0] == '3':
     INPUT = input
@@ -33,8 +34,12 @@ RINT = random.randint
 
 def generate(choice, i):
     try:
-        os.system('%s < input/input%02d.txt > output/output%02d.txt' %
-                  (LANGS[choice - 1]['command'], i, i))
+        if platform[0] == 'w':
+            os.system('%s < input\\input%02d.txt > output\\output%02d.txt' %
+                      (LANGS[choice - 1]['command'], i, i))
+        else:
+            os.system('%s < input/input%02d.txt > output/output%02d.txt' %
+                      (LANGS[choice - 1]['command'], i, i))
 
     except Exception:
         print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
@@ -55,15 +60,15 @@ def zip_them(test_files, choice):
                 exe_command, globals=globals(), number=1)
             print('Time taken to execute this TC %02f seconds' %
                   (exe_time), file=sys.stderr)
-            f = open('output/output%02d.txt' % i, 'rt')
+            f = open(os.path.join('output', 'output%02d.txt'% i), 'rt')
             try:
                 if f.read() is '':
                     raise Exception('blank output file')
             except Exception as error:
                 print(repr(error))
             f.close()
-            zip_file.write('input/input%02d.txt' % i)
-            zip_file.write('output/output%02d.txt' % i)
+            zip_file.write(os.path.join('input', 'input%02d.txt' % i))
+            zip_file.write(os.path.join('output', 'output%02d.txt' % i))
 
 
 def main():
@@ -78,7 +83,7 @@ def main():
 
     for i in XRange(0, test_files + 1):
         print('Generating:', i, file=sys.stderr)
-        sys.stdout = open('input/input%02d.txt' % i, 'w')
+        sys.stdout = open(os.path.join('input', 'input%02d.txt' % i), 'w')
 
         '''
         Input area will start here,
