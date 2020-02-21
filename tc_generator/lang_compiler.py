@@ -3,7 +3,7 @@ platform = sys.platform
 cmd = 'logic'
 
 if platform[0] == 'w':
-    cmd = './' + cmd + '.exe'
+    cmd = cmd + '.exe'
     LANGS = [{'req': 'gcc',
               'command': cmd,
               'link': 'https://gcc.gnu.org/install/',
