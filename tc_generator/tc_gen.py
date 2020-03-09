@@ -34,21 +34,27 @@ RINT = random.randint
 
 def generate(choice, i):
     try:
-        if platform[0] == 'w':
-            os.system('%s < input\\input%02d.txt > output\\output%02d.txt' %
-                      (LANGS[choice - 1]['command'], i, i))
-        else:
-            os.system('%s < input/input%02d.txt > output/output%02d.txt' %
-                      (LANGS[choice - 1]['command'], i, i))
-
-    except Exception:
-        print("Looks like you don't have {0} :/ \nYou can refer to {1} for help.".format(
-            LANGS[choice - 1]['req'], LANGS[choice - 1]['link']))
+        if os.system('%s < %s > %s' % (LANGS[choice - 1]['command'], 
+                os.path.join('input', f'input{i:02d}.txt'),
+                os.path.join('output', f'output{i:02d}.txt'))) != 0:
+            raise Exception('Runtime error!')
+    except Exception as error:
+        print(error, file=sys.stderr)
+        print("Looks like you don't have %s :/ \nYou can refer to %s for help." % (
+            LANGS[choice - 1]['req'], LANGS[choice - 1]['link']), file=sys.stderr)
+        sys.exit(1)
 
 
 def compile_them(test_files, choice):
-    if os.system(LANGS[choice - 1]['compile']) == 0:
-        zip_them(test_files, choice)
+    try:
+        if os.system(LANGS[choice - 1]['compile']) != 0:
+            raise Exception('Compilation error!')
+    except Exception as error:
+        print(error, file=sys.stderr)
+        print("Looks like you don't have %s :/ \nYou can refer to %s for help." % (
+            LANGS[choice - 1]['req'], LANGS[choice - 1]['link']), file=sys.stderr)
+        sys.exit(1)
+    zip_them(test_files, choice)
 
 
 def zip_them(test_files, choice):
@@ -63,21 +69,24 @@ def zip_them(test_files, choice):
             f = open(os.path.join('output', 'output%02d.txt'% i), 'rt')
             try:
                 if f.read() is '':
-                    raise Exception('blank output file')
+                    raise Exception('Blank output file!')
             except Exception as error:
-                print(repr(error))
+                print(error, file=sys.stderr)
             f.close()
             zip_file.write(os.path.join('input', 'input%02d.txt' % i))
             zip_file.write(os.path.join('output', 'output%02d.txt' % i))
 
 
 def main():
-    '''choice = int(INPUT(
-        "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))'''
-    choice = int(sys.argv[1])
+    try:
+        choice = int(INPUT(
+            "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
+    except (SyntaxError, ValueError):
+        print("You didn't enter a number!")
+        sys.exit(1)
     if choice not in range(1, 7):
         print("Wrong choice entered!")
-        exit()
+        sys.exit(1)
 
     test_files = 10  # number of test files, change it according to you.
 
