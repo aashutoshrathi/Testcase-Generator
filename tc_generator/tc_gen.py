@@ -17,14 +17,15 @@ import zipfile
 from lang_compiler import LANGS
 
 platform = sys.platform
+dirname = os.path.dirname(__file__) # Absolute path of the file
 
 if sys.version[0] == '3':
     INPUT = input
     XRange = range
 
 try:
-    os.mkdir('input')
-    os.mkdir('output')
+    os.mkdir(os.path.join(dirname, 'input'))
+    os.mkdir(os.path.join(dirname, 'output'))
 except OSError:
     pass
 
@@ -35,8 +36,8 @@ RINT = random.randint
 def generate(choice, i):
     try:
         if os.system('%s < %s > %s' % (LANGS[choice - 1]['command'], 
-                os.path.join('input', f'input{i:02d}.txt'),
-                os.path.join('output', f'output{i:02d}.txt'))) != 0:
+                os.path.join(dirname, 'input', f'input{i:02d}.txt'),
+                os.path.join(dirname, 'output', f'output{i:02d}.txt'))) != 0:
             raise Exception('Runtime error!')
     except Exception as error:
         print(error, file=sys.stderr)
@@ -58,7 +59,8 @@ def compile_them(test_files, choice):
 
 
 def zip_them(test_files, choice):
-    with zipfile.ZipFile('test-cases.zip', 'w', zipfile.ZIP_DEFLATED) as zip_file:
+    with zipfile.ZipFile(os.path.join(dirname, 'test-cases.zip'), 'w',
+        zipfile.ZIP_DEFLATED) as zip_file:
         for i in XRange(0, test_files + 1):
             print('Zipping:', i, file=sys.stderr)
             exe_command = 'generate({0}, {1})'.format(choice, i)
@@ -66,15 +68,15 @@ def zip_them(test_files, choice):
                 exe_command, globals=globals(), number=1)
             print('Time taken to execute this TC %02f seconds' %
                   (exe_time), file=sys.stderr)
-            f = open(os.path.join('output', 'output%02d.txt'% i), 'rt')
+            f = open(os.path.join(dirname, 'output', 'output%02d.txt'% i), 'rt')
             try:
                 if f.read() is '':
                     raise Exception('Blank output file!')
             except Exception as error:
                 print(error, file=sys.stderr)
             f.close()
-            zip_file.write(os.path.join('input', 'input%02d.txt' % i))
-            zip_file.write(os.path.join('output', 'output%02d.txt' % i))
+            zip_file.write(os.path.join(dirname, 'input', 'input%02d.txt' % i))
+            zip_file.write(os.path.join(dirname, 'output', 'output%02d.txt' % i))
 
 
 def main():
@@ -92,7 +94,7 @@ def main():
 
     for i in XRange(0, test_files + 1):
         print('Generating:', i, file=sys.stderr)
-        sys.stdout = open(os.path.join('input', 'input%02d.txt' % i), 'w')
+        sys.stdout = open(os.path.join(dirname, 'input', 'input%02d.txt' % i), 'w')
 
         '''
         Input area will start here,
@@ -109,8 +111,8 @@ def main():
         sys.stdout.close()
         # Input File Printing Ends
     compile_them(test_files, choice)
-    shutil.rmtree('input')
-    shutil.rmtree('output')
+    shutil.rmtree(os.path.join(dirname, 'input'))
+    shutil.rmtree(os.path.join(dirname, 'output'))
 
 
 if __name__ == "__main__":
