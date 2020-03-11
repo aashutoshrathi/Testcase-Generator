@@ -18,11 +18,20 @@ Well, Here is one Click **Python** Code, for your respective logic(solution).
 - Selected as project in [GSSoC 2019](https://www.gssoc.tech/projects.html)
 - Selected as project in [NJACKWinterOfCode 2018]([https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator](https://njackwinterofcode.github.io/))
 
+### Supported Languages for Testcase Generation
+
+- [C](/tc_generator/logic.c)
+- [C++](/tc_generator/logic.cpp)
+- [Java](/tc_generator/logic.java)
+- [Python](/tc_generator/logic.py)
+- [C#](/tc_generator/logic.cs)
+- [Go](/tc_generator/logic.go)
+
 ### Python Codes and Examples
 
 Logic File | TC Generator File |
 ------------------ | ------------- |
-C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
+C / C++ / Java / Python / C# / Go | [TC Generator](/tc_generator/tc_gen.py) |
 
 ## Install
 
@@ -30,8 +39,7 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
 
 * Clone the repository `$ git clone https://github.com/aashutoshrathi/HackerRank-Test-Case-Generator.git `
 
-* Create a virtual environment `$ virtualenv venv `, 
-[click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv.
+* Create a virtual environment `$ virtualenv venv ` ([click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv)
 
 * #### Activate virtualenv (Linux)
 ```sh
@@ -43,12 +51,19 @@ C / C++ / Java / Python | [TC Generator](/tc_generator/tc_gen.py) |
    $ activate
    $ pip install -r requirements.txt
 ```   
-* Go to ```tc_generator ``` and run the project.
+* Change directory to ```tc_generator ```
 ```sh
    $ cd tc_generator/
-   $ python tc_gen.py <choice>
 ```
-- Enter 1 for  C, 2 for C++, 3 for Java, 4 for  Python, 5 for C# or 6 for Go in the \<choice> above
+* Edit the logic file of the language of your choice with the code for which you want to generate TCs
+* Edit the Input area in ```tc_gen.py``` according to the input format you wish to generate
+* Run the project
+```sh
+   $ python tc_gen.py
+```
+* Enter your choice of language when prompted.
+* The input and output files would be generated and stored in ```test-cases.zip```
+
 ### How it Works ? 🤔
 
 ![Demo](demo2.gif)

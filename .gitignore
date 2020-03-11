@@ -107,3 +107,6 @@ ENV/
 *.zip
 package-lock.json
 node_modules/
+tc_generator/input/
+tc_generator/output/
+tc_generator/logic
