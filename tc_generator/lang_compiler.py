@@ -1,31 +1,31 @@
 import os
 
-dirname = os.path.dirname(__file__) # Absolute path of the file
-cmd = os.path.join(dirname, 'logic') # Command to run the logic file
+DIRNAME = os.path.dirname(__file__) # Absolute path of the file
+CMD = os.path.join(DIRNAME, 'logic') # Command to run the logic file
 
 
 LANGS = [{'req': 'gcc',
-          'command': cmd,
+          'command': CMD,
           'link': 'https://gcc.gnu.org/install/',
-          'compile': 'gcc -o ' + cmd + ' ' + cmd + '.c'},
+          'compile': f'gcc -o {CMD} {CMD}.c'},
          {'req': 'g++',
-          'command': cmd,
+          'command': CMD,
           'link': 'https://www.cs.odu.edu/~zeil/cs250PreTest/latest/Public/installingACompiler/',
-          'compile': 'g++ -o ' + cmd + ' ' + cmd + '.cpp'},
+          'compile': f'g++ -o {CMD} {CMD}.cpp'},
          {'req': 'Java',
-          'command': 'java -cp ' + dirname + ' ' + 'logic',
-          'link': 'https://introcs.cs.princeton.edu/java/15inout/windows-cmd.html',
-          'compile': 'javac ' + cmd + '.java'},
+          'command': f'java -cp {DIRNAME} logic',
+          'link': 'https://introcs.cs.princeton.edu/java/15inout/windows-CMD.html',
+          'compile': f'javac {CMD}.java'},
          {'req': 'Python',
-          'command': 'python ' + cmd + '.py',
+          'command': f'python {CMD}.py',
           'link': 'https://www.python.org/downloads/',
           'compile': ''},
          {'req': 'C#',
-          'command': 'mono ' + cmd,
+          'command': f'mono {CMD}',
           'link': 'https://www.mono-project.com/docs/about-mono/languages/csharp/',
-          'compile': 'msc ' + cmd + '.cs'},
+          'compile': f'msc {CMD}.cs'},
          {'req': 'Golang',
-          'command': cmd,
+          'command': CMD,
           'link': 'https://golang.org/doc/install',
-          'compile': 'go build -o ' + cmd + ' ' + cmd + '.go'},
+          'compile': f'go build -o {CMD} {CMD}.go'},
          ]
