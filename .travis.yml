@@ -14,6 +14,8 @@ jobs:
       before_install:
         - choco install python --version 3.8.0
         - python -m pip install --upgrade pip
+        - choco install -y nodejs
+        - npm i -g npm 
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 install:
   - pip3 install --upgrade pip
