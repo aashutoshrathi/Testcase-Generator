@@ -6,6 +6,9 @@ Testcase Generator for HackerRank
 '''
 from __future__ import print_function
 
+__all__ = ['DIRNAME', 'IN_SOURCE', 'OUT_SOURCE', 'TC_SOURCE', 'generate', \
+    'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them']
+
 import math
 import os
 import random
@@ -14,7 +17,7 @@ import sys
 import timeit
 import zipfile
 
-from lang_compiler import LANGS
+from tc_generator.lang_compiler import LANGS
 
 DIRNAME = os.path.dirname(__file__) # Absolute path of the file
 IN_SOURCE = os.path.join(DIRNAME, 'input')
@@ -49,6 +52,7 @@ def generate(lang_choice, i):
             LANGS[lang_choice - 1]['req'], LANGS[lang_choice - 1]['link']), \
                 file=sys.stderr)
         sys.exit(1)
+    return 0
 
 
 def compile_them(lang_choice):
@@ -61,6 +65,7 @@ def compile_them(lang_choice):
             LANGS[lang_choice - 1]['req'], LANGS[lang_choice - 1]['link']), \
                 file=sys.stderr)
         sys.exit(1)
+    return 0
 
 
 def zip_hackerrank():
@@ -72,6 +77,7 @@ def zip_hackerrank():
         for out_file in os.listdir(OUT_SOURCE):
             zip_file.write(os.path.join(OUT_SOURCE, out_file), \
                 os.path.join('output', out_file))
+    return 0
 
 
 def zip_hackerearth():
@@ -83,6 +89,7 @@ def zip_hackerearth():
         for out_file in os.listdir(OUT_SOURCE):
             zip_file.write(os.path.join(OUT_SOURCE, out_file), \
                 out_file.replace('put', ''))
+    return 0
 
 
 def zip_codechef():
@@ -92,6 +99,7 @@ def zip_codechef():
         shutil.copy(os.path.join(IN_SOURCE, in_file), TC_SOURCE)
     for out_file in os.listdir(OUT_SOURCE):
         shutil.copy(os.path.join(OUT_SOURCE, out_file), TC_SOURCE)
+    return 0
 
 
 def zip_them(test_files, lang_choice, pltfrm_choice):
@@ -99,9 +107,9 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
         print(f'Generating output: {i:2d}', file=sys.stderr)
         exe_command = 'generate({0}, {1})'.format(lang_choice, i)
         exe_time = timeit.timeit(exe_command, globals=globals(), number=1)
-        print('Time taken to execute this TC %02f seconds' %
-              (exe_time), file=sys.stderr)
-        out_file = os.path.join(OUT_SOURCE, 'output%02d.txt'% i)
+        print(f'Time taken to execute this TC {exe_time:02f} seconds', \
+            file=sys.stderr)
+        out_file = os.path.join(OUT_SOURCE, f'output{i:02d}.txt')
         try:
             if os.stat(out_file).st_size == 0:
                 raise Exception('Blank output file!')
@@ -117,6 +125,7 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
     else:
         print('Wrong choice of platform!', file=sys.stderr)
         sys.exit(1)
+    return 0
 
 
 def main():
@@ -144,7 +153,7 @@ def main():
 
     for i in XRange(0, test_files + 1):
         print(f'Generating input: {i:2d}', file=sys.stderr)
-        sys.stdout = open(os.path.join(IN_SOURCE, 'input%02d.txt' % i), 'w')
+        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
 
         '''
         Input area will start here,

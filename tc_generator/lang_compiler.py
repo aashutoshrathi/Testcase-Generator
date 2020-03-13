@@ -1,3 +1,5 @@
+__all__ = ['LANGS']
+
 import os
 
 DIRNAME = os.path.dirname(__file__) # Absolute path of the file
