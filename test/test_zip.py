@@ -39,11 +39,13 @@ def make_input_files():
 def test_zip_codechef():
     # Tests if zipping correctly for CodeChef
     zip_codechef()
+    tc_files = os.listdir(TC_SOURCE)
+    generated_files = []
     for i in range(0, TEST_FILES + 1):
-      if not os.path.exists(os.path.join(TC_SOURCE, f'input{i:02d}.txt')):
-          assert False
-      if not os.path.exists(os.path.join(TC_SOURCE, f'input{i:02d}.txt')):
-          assert False
+      generated_files.append(f'input{i:02d}.txt')
+      generated_files.append(f'output{i:02d}.txt')
+    if sorted(tc_files) != sorted(generated_files):
+      assert False
 
     shutil.rmtree(TC_SOURCE)
 
@@ -72,8 +74,8 @@ def test_zip_hackerrank():
     zip_file.close()
     generated_files = []
     for i in range(0, TEST_FILES + 1):
-      generated_files.append(os.path.join('input', f'input{i:02d}.txt'))
-      generated_files.append(os.path.join('output', f'output{i:02d}.txt'))
+      generated_files.append(f'input/input{i:02d}.txt')
+      generated_files.append(f'output/output{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
       assert False
 
