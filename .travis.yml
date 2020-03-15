@@ -1,7 +1,7 @@
 language: python
 jobs:
   include:
-    - name: "Python 3.8.0 on Bionic Linux"
+    - name: "Python 3.8.0 on Ubuntu"
       dist: bionic
       python: 3.8
     - name: "Python 3.7.4 on macOS"
@@ -20,6 +20,5 @@ install:
   - pip3 install -r requirements.txt
   - pip3 install -e .
 script:
-  - echo "Hello Travis"
   - python3 --version || python --version
   - pytest
