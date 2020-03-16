@@ -85,6 +85,8 @@ def zip_codechef():
 
 
 def zip_them(test_files, lang_choice, pltfrm_choice):
+    platforms = [zip_hackerrank, zip_hackerearth, zip_codechef]
+
     for i in range(0, test_files + 1):
         print(f'Generating output: {i}')
         exe_command = 'generate({0}, {1})'.format(lang_choice, i)
@@ -99,13 +101,7 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
             print(error, file=sys.stderr)
     print('Zipping ... ')
 
-    switcher = {
-      1: zip_hackerrank,
-      2: zip_hackerearth,
-      3: zip_codechef
-    }
-
-    zip_choice  = switcher.get(pltfrm_choice)
+    zip_choice  = platforms[pltfrm_choice]
     zip_choice()
 
 
@@ -133,6 +129,7 @@ def main():
         sys.exit(1)
 
     lang_choice -= 1
+    pltfrm_choice -=1
     test_files = 10  # number of test files, change it according to you.
 
     for i in range(0, test_files + 1):
