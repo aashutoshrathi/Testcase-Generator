@@ -2,7 +2,7 @@
 
 [<img src="https://image.flaticon.com/icons/svg/180/180867.svg" align="right" width="100">](#)
 
-[![](https://img.shields.io/travis/aashutoshrathi/HackerRank-Test-Case-Generator/master.svg?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
+[![](https://img.shields.io/travis/aashutoshrathi/Testcase-Generator?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
 
 One Click Test Case Generation for HackerRank Problems.
 
