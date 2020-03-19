@@ -1,0 +1,52 @@
+{
+  "projectName": "Testcase-Generator",
+  "projectOwner": "aashutoshrathi",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "aashutoshrathi",
+      "name": "Aashutosh Rathi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21199234?v=4",
+      "profile": "http://aashutosh.dev",
+      "contributions": [
+        "tool",
+        "projectManagement",
+        "review",
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "thepushkarp",
+      "name": "Pushkar Patel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/42088801?v=4",
+      "profile": "https://github.com/thepushkarp",
+      "contributions": [
+        "maintenance",
+        "test",
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "prithaupadhyay",
+      "name": "Pritha Upadhyay",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21213021?v=4",
+      "profile": "https://github.com/prithaupadhyay",
+      "contributions": [
+        "maintenance",
+        "test",
+        "bug",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
