@@ -76,7 +76,7 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 ```
 * Enter your choice of language when prompted
 * Enter the choice of platform when prompted
-* The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` folder for CodeChef.
+* The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
 
 ## How it Works ? 🤔
 

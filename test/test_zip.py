@@ -1,10 +1,16 @@
+"""
+Tests all the zip functions.
+"""
+
 import os
 import sys
 import shutil
 import zipfile
 import pytest
 
-from tc_generator.tc_gen import *
+from tc_generator.tc_gen import (TC_SOURCE, IN_SOURCE, OUT_SOURCE, RINT, POWER,
+                                 generate, zip_codechef, zip_hackerearth,
+                                 zip_hackerrank)
 
 TEST_FILES = 4 # Number of files to create for testing
 TEST_LANG = 3 # Testing for Python
@@ -13,7 +19,10 @@ TC_ZIP = TC_SOURCE + '.zip'
 
 @pytest.fixture(autouse=True)
 def make_input_files():
-    # Generate input files for testing
+    """
+    Creates the input files for testing
+    """
+
     if not os.path.exists(IN_SOURCE):
         os.mkdir(IN_SOURCE)
     if not os.path.exists(OUT_SOURCE):
@@ -37,46 +46,61 @@ def make_input_files():
 
 
 def test_zip_codechef():
-    # Tests if zipping correctly for CodeChef
+    """
+    Checks if the zip_codechef function saves testcases in the correct structure
+    of all input files as input<number>.txt and output files as output<number>.txt
+    inside the test-cases directory.
+    """
+
     zip_codechef()
     tc_files = os.listdir(TC_SOURCE)
     generated_files = []
     for i in range(0, TEST_FILES + 1):
-      generated_files.append(f'input{i:02d}.txt')
-      generated_files.append(f'output{i:02d}.txt')
+        generated_files.append(f'input{i:02d}.txt')
+        generated_files.append(f'output{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-      assert False
+        assert False
 
     shutil.rmtree(TC_SOURCE)
 
 
 def test_zip_hackerearth():
-    # Tests if zipping correctly for HackerEarth
+    """
+    Checks if the zip_hackerearth function saves testcases in the correct structure
+    of all input files as in<number>.txt and output files as out<number>.txt
+    inside test-cases.zip.
+    """
+
     zip_hackerearth()
     zip_file = zipfile.ZipFile(TC_ZIP)
     tc_files = zip_file.namelist()
     zip_file.close()
     generated_files = []
     for i in range(0, TEST_FILES + 1):
-      generated_files.append(f'in{i:02d}.txt')
-      generated_files.append(f'out{i:02d}.txt')
+        generated_files.append(f'in{i:02d}.txt')
+        generated_files.append(f'out{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-      assert False
+        assert False
 
     os.remove(TC_ZIP)
 
 
 def test_zip_hackerrank():
-    # Tests if zipping correctly for HackerRank
+    """
+    Checks if the zip_hackerrank function saves testcases in the correct structure
+    of all input files as input<number>.txt and output files as output<number>.txt
+    inside test-cases.zip.
+    """
+
     zip_hackerrank()
     zip_file = zipfile.ZipFile(TC_ZIP)
     tc_files = zip_file.namelist()
     zip_file.close()
     generated_files = []
     for i in range(0, TEST_FILES + 1):
-      generated_files.append(f'input/input{i:02d}.txt')
-      generated_files.append(f'output/output{i:02d}.txt')
+        generated_files.append(f'input/input{i:02d}.txt')
+        generated_files.append(f'output/output{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-      assert False
+        assert False
 
     os.remove(TC_ZIP)
