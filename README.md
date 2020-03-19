@@ -80,7 +80,7 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 
 ## How it Works ? 🤔
 
-![Demo](demo2.gif)
+![Demo](demo3.gif)
 
 ## Setup using Docker 🐳
 
