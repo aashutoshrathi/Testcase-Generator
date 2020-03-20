@@ -1,12 +1,14 @@
-'''
+"""
         Aashutosh Rathi
 https://github.com/aashutoshrathi/
-Testcase Generator for HackerRank
+Testcase Generator for HackerRank, HackerEarth and CodeChef
 
-'''
+Usage: Run 'python tc_gen.py' and follow the prompt to select
+language and platform for testcase generation.
+"""
 
 __all__ = ['DIRNAME', 'IN_SOURCE', 'OUT_SOURCE', 'POWER', 'RINT', 'TC_SOURCE', 'generate',
-  'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them']
+           'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them']
 
 import math
 import os
@@ -27,6 +29,16 @@ RINT = random.randint
 
 
 def generate(lang_choice, i):
+    """
+    Passes input through the compiled code (Except Python) and generates
+    output files.
+    Raises error if there's a problem while running.
+
+    Argument:
+    lang_choice -- The choice of language which is chosen by the user
+    i           -- 'i'th testcase for which output is to be generated
+    """
+
     try:
         if os.system(f"{LANGS[lang_choice]['command']} < \
           {os.path.join(IN_SOURCE, f'input{i:02d}.txt')} > \
@@ -40,6 +52,14 @@ def generate(lang_choice, i):
 
 
 def compile_them(lang_choice):
+    """
+    Compiles the code.
+    Raises error if there's some compilation error.
+
+    Argument:
+    lang_choice -- The choice of language which is chosen by the user
+    """
+
     try:
         if os.system(LANGS[lang_choice]['compile']) != 0:
             raise Exception('Compilation error!')
@@ -51,6 +71,13 @@ def compile_them(lang_choice):
 
 
 def zip_hackerrank():
+    """
+    Zips files into 'test-cases.zip'.
+    Input files are named as input<number>.txt and are placed inside
+    'input' directory in zip.
+    Output files are named as output<number>.txt and are placed inside'output' directory in zip.
+    """
+
     with zipfile.ZipFile(TC_SOURCE + '.zip', 'w', \
         zipfile.ZIP_DEFLATED) as zip_file:
         for in_file in os.listdir(IN_SOURCE):
@@ -63,6 +90,12 @@ def zip_hackerrank():
 
 
 def zip_hackerearth():
+    """
+    Zips files into 'test-cases.zip'.
+    Input files are named as in<number>.txt and are placed inside the zip.
+    Output files are named as out<number>.txt and are placed inside the zip.
+    """
+
     with zipfile.ZipFile(TC_SOURCE + '.zip', 'w', \
         zipfile.ZIP_DEFLATED) as zip_file:
         for in_file in os.listdir(IN_SOURCE):
@@ -75,16 +108,32 @@ def zip_hackerearth():
 
 
 def zip_codechef():
+    """
+    Places files inside 'test-cases' directory.
+    Input files are named as input<number>.txt and are placed inside the directory.
+    Output files are named as output<number>.txt and are placed inside the directory.
+    """
+
     if not os.path.exists(TC_SOURCE):
         os.mkdir(TC_SOURCE)
     for in_file in os.listdir(IN_SOURCE):
         shutil.copy(os.path.join(IN_SOURCE, in_file), TC_SOURCE)
     for out_file in os.listdir(OUT_SOURCE):
         shutil.copy(os.path.join(OUT_SOURCE, out_file), TC_SOURCE)
-    print(f"Test cases saved in {TC_SOURCE} folder")
+    print(f"Test cases saved in {TC_SOURCE} directory")
 
 
 def zip_them(test_files, lang_choice, pltfrm_choice):
+    """
+    Calls generate function for each test case, checks for blank output files and
+    then calls the zipping function for the platform chosen by the user.
+
+    Arguments:
+    test_files    -- The number of test case files to be generated
+    lang_choice   -- The choice of language which is chosen by the user
+    pltfrm_choice -- The choice of platform which is chosen by the user
+    """
+
     platforms = [zip_hackerrank, zip_hackerearth, zip_codechef]
 
     for i in range(0, test_files + 1):
@@ -101,16 +150,20 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
             print(error, file=sys.stderr)
     print('Zipping ... ')
 
-    zip_choice  = platforms[pltfrm_choice]
+    zip_choice = platforms[pltfrm_choice]
     zip_choice()
 
 
 def main():
+    """
+    Takes in the choice of language and platform from the user, creates input files as per the
+    logic defined in the input area and calls in the complie_them and zip_them function.
+    """
 
     if not os.path.exists(IN_SOURCE):
-      os.mkdir(IN_SOURCE)
+        os.mkdir(IN_SOURCE)
     if not os.path.exists(OUT_SOURCE):
-      os.mkdir(OUT_SOURCE)
+        os.mkdir(OUT_SOURCE)
 
     try:
         lang_choice = int(input(
@@ -129,17 +182,15 @@ def main():
         sys.exit(1)
 
     lang_choice -= 1
-    pltfrm_choice -=1
+    pltfrm_choice -= 1
     test_files = 10  # number of test files, change it according to you.
 
     for i in range(0, test_files + 1):
         print(f'Generating input: {i}')
         sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
 
-        '''
-        Input area will start here,
-        everything that you print out here will be taken as input in your logic file.
-        '''
+        # Input area will start here,
+        # everything that you print out here will be taken as input in your logic file.
 
         # Input File Printing Starts
         # number of test cases in (1,10^5)

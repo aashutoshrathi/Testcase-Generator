@@ -7,7 +7,9 @@
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
     "lint": "eslint '**/*.js'",
-    "lint-fix": "prettier-eslint '**/*.js' --write"
+    "lint-fix": "prettier-eslint '**/*.js' --write",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "husky": {
     "hooks": {
@@ -23,6 +25,7 @@
   "author": "Aashutosh Rathi",
   "license": "MIT",
   "dependencies": {
+    "all-contributors-cli": "^6.14.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

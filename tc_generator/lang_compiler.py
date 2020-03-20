@@ -1,3 +1,8 @@
+"""
+lang_compiler.py - The list LANGS contains the languages, commands for running
+and/or compiling them and links of documentation in case something goes wrong.
+"""
+
 __all__ = ['LANGS']
 
 import os

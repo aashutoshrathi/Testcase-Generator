@@ -1,0 +1,106 @@
+{
+  "projectName": "Testcase-Generator",
+  "projectOwner": "aashutoshrathi",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "aashutoshrathi",
+      "name": "Aashutosh Rathi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21199234?v=4",
+      "profile": "http://aashutosh.dev",
+      "contributions": [
+        "tool",
+        "projectManagement",
+        "review",
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "thepushkarp",
+      "name": "Pushkar Patel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/42088801?v=4",
+      "profile": "https://github.com/thepushkarp",
+      "contributions": [
+        "maintenance",
+        "test",
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "prithaupadhyay",
+      "name": "Pritha Upadhyay",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21213021?v=4",
+      "profile": "https://github.com/prithaupadhyay",
+      "contributions": [
+        "maintenance",
+        "test",
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "vishnuramana",
+      "name": "Vishnu Ramana",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10045752?v=4",
+      "profile": "https://www.vishnu.codes",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "timrossback",
+      "name": "Tim Rossback",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22669894?v=4",
+      "profile": "https://itspugle.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "sasivarnan",
+      "name": "Sasivarnan R",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5305600?v=4",
+      "profile": "https://geekscreed.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "gerardogalvez",
+      "name": "Gerardo Gálvez",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8509232?v=4",
+      "profile": "https://github.com/gerardogalvez",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dastgirp",
+      "name": "Dastgir",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2889931?v=4",
+      "profile": "https://github.com/dastgirp",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Sai-Adarsh",
+      "name": "Sai Adarsh S",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21096774?v=4",
+      "profile": "http://www.sai-adarsh.ml/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
