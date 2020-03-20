@@ -4,7 +4,7 @@
 
 [![](https://img.shields.io/travis/aashutoshrathi/Testcase-Generator?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
 
-One Click Test Case Generation for [HackerRank](https://eee.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems.
+One Click Test Case Generation for [HackerRank](https://www.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems.
 
 Are you a Problem Author?
 
@@ -118,6 +118,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://aashutosh.dev"><img src="https://avatars2.githubusercontent.com/u/21199234?v=4" width="100px;" alt=""/><br /><sub><b>Aashutosh Rathi</b></sub></a><br /><a href="#tool-aashutoshrathi" title="Tools">🔧</a> <a href="#projectManagement-aashutoshrathi" title="Project Management">📆</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/pulls?q=is%3Apr+reviewed-by%3Aaashutoshrathi" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/issues?q=author%3Aaashutoshrathi" title="Bug reports">🐛</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=aashutoshrathi" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/thepushkarp"><img src="https://avatars0.githubusercontent.com/u/42088801?v=4" width="100px;" alt=""/><br /><sub><b>Pushkar Patel</b></sub></a><br /><a href="#maintenance-thepushkarp" title="Maintenance">🚧</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=thepushkarp" title="Tests">⚠️</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/issues?q=author%3Athepushkarp" title="Bug reports">🐛</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=thepushkarp" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/prithaupadhyay"><img src="https://avatars1.githubusercontent.com/u/21213021?v=4" width="100px;" alt=""/><br /><sub><b>Pritha Upadhyay</b></sub></a><br /><a href="#maintenance-prithaupadhyay" title="Maintenance">🚧</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=prithaupadhyay" title="Tests">⚠️</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/issues?q=author%3Aprithaupadhyay" title="Bug reports">🐛</a> <a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=prithaupadhyay" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.vishnu.codes"><img src="https://avatars2.githubusercontent.com/u/10045752?v=4" width="100px;" alt=""/><br /><sub><b>Vishnu Ramana</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=vishnuramana" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://itspugle.com"><img src="https://avatars3.githubusercontent.com/u/22669894?v=4" width="100px;" alt=""/><br /><sub><b>Tim Rossback</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=timrossback" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://geekscreed.com"><img src="https://avatars0.githubusercontent.com/u/5305600?v=4" width="100px;" alt=""/><br /><sub><b>Sasivarnan R</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=sasivarnan" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/gerardogalvez"><img src="https://avatars2.githubusercontent.com/u/8509232?v=4" width="100px;" alt=""/><br /><sub><b>Gerardo Gálvez</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=gerardogalvez" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/dastgirp"><img src="https://avatars0.githubusercontent.com/u/2889931?v=4" width="100px;" alt=""/><br /><sub><b>Dastgir</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=dastgirp" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.sai-adarsh.ml/"><img src="https://avatars1.githubusercontent.com/u/21096774?v=4" width="100px;" alt=""/><br /><sub><b>Sai Adarsh S</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=Sai-Adarsh" title="Documentation">📖</a></td>
   </tr>
 </table>
 
