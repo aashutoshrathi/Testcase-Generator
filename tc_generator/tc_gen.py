@@ -20,7 +20,7 @@ import zipfile
 
 from tc_generator.lang_compiler import LANGS
 
-DIRNAME = os.path.dirname(__file__) # Absolute path of the file
+DIRNAME = os.path.abspath(os.path.dirname(__file__)) # Absolute path of the file
 IN_SOURCE = os.path.join(DIRNAME, 'input')
 OUT_SOURCE = os.path.join(DIRNAME, 'output')
 TC_SOURCE = os.path.join(DIRNAME, 'test-cases')

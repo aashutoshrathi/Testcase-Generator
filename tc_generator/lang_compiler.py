@@ -7,7 +7,7 @@ __all__ = ['LANGS']
 
 import os
 
-DIRNAME = os.path.dirname(__file__) # Absolute path of the file
+DIRNAME = os.path.abspath(os.path.dirname(__file__)) # Absolute path of the file
 CMD = os.path.join(DIRNAME, 'logic') # Command to run the logic file
 
 
