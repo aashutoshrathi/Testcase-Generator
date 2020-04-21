@@ -10,7 +10,8 @@ import pytest
 
 from tc_generator.tc_gen import (TC_SOURCE, IN_SOURCE, OUT_SOURCE, RINT, POWER,
                                  generate, zip_codechef, zip_hackerearth,
-                                 zip_hackerrank)
+                                 zip_hackerrank, make_dirs)
+
 
 TEST_FILES = 4 # Number of files to create for testing
 TEST_LANG = 3 # Testing for Python
@@ -23,10 +24,7 @@ def make_input_files():
     Creates the input files for testing
     """
 
-    if not os.path.exists(IN_SOURCE):
-        os.mkdir(IN_SOURCE)
-    if not os.path.exists(OUT_SOURCE):
-        os.mkdir(OUT_SOURCE)
+    make_dirs()
 
     for i in range(0, TEST_FILES + 1):
         sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
@@ -36,7 +34,7 @@ def make_input_files():
         for _ in range(required_input):
             print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
-        sys.stdout = sys.__stdout__
+        sys.stdout.close()
         generate(TEST_LANG, i)
 
     yield
@@ -58,6 +56,8 @@ def test_zip_codechef():
     for i in range(0, TEST_FILES + 1):
         generated_files.append(f'input{i:02d}.txt')
         generated_files.append(f'output{i:02d}.txt')
+    print(sorted(tc_files), file=sys.stderr)
+    print(sorted(generated_files), file=sys.stderr)
     if sorted(tc_files) != sorted(generated_files):
         assert False
 

@@ -8,7 +8,8 @@ language and platform for testcase generation.
 """
 
 __all__ = ['DIRNAME', 'IN_SOURCE', 'OUT_SOURCE', 'POWER', 'RINT', 'TC_SOURCE', 'generate',
-           'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them']
+           'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them',
+           'check_empty', 'make_dirs']
 
 import math
 import os
@@ -17,15 +18,69 @@ import shutil
 import sys
 import timeit
 import zipfile
+import subprocess
 
 from tc_generator.lang_compiler import LANGS
+
 
 DIRNAME = os.path.abspath(os.path.dirname(__file__)) # Absolute path of the file
 IN_SOURCE = os.path.join(DIRNAME, 'input')
 OUT_SOURCE = os.path.join(DIRNAME, 'output')
 TC_SOURCE = os.path.join(DIRNAME, 'test-cases')
+TC_ZIP = TC_SOURCE + '.zip'
 POWER = math.pow
 RINT = random.randint
+
+
+def make_dirs():
+    """
+    Deletes old directories and creates new ones
+    """
+
+    shutil.rmtree(IN_SOURCE, ignore_errors=True)
+    shutil.rmtree(OUT_SOURCE, ignore_errors=True)
+    shutil.rmtree(TC_SOURCE, ignore_errors=True)
+    try:
+        os.remove(TC_ZIP)
+    except OSError:
+        pass
+
+    os.mkdir(IN_SOURCE)
+    os.mkdir(OUT_SOURCE)
+
+
+def check_empty(file):
+    """
+    Raises exception if file is empty
+    """
+
+    if os.stat(file).st_size == 0:
+        raise Exception('Empty output file!')
+
+
+def compile_them(lang_choice):
+    """
+    Compiles the code.
+    Raises error if there's some compilation error.
+
+    Argument:
+    lang_choice -- The choice of language which is chosen by the user
+    """
+
+    try:
+        compiled = subprocess.Popen(LANGS[lang_choice]['compile'],
+                                    stdin=subprocess.PIPE,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    universal_newlines=True)
+        stdout, stderr = compiled.communicate()
+        if stderr:
+            raise Exception('Compilation error!')
+    except Exception as error:
+        print(error, file=sys.stderr)
+        print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
+        print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
+        sys.exit(1)
 
 
 def generate(lang_choice, i):
@@ -40,29 +95,16 @@ def generate(lang_choice, i):
     """
 
     try:
-        if os.system(f"{LANGS[lang_choice]['command']} < \
-          {os.path.join(IN_SOURCE, f'input{i:02d}.txt')} > \
-            {os.path.join(OUT_SOURCE, f'output{i:02d}.txt')}") != 0:
+        with open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'r') as in_file:
+            with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'w+') as out_file:
+                generated = subprocess.Popen(LANGS[lang_choice]['command'],
+                                             stdin=in_file,
+                                             stdout=out_file,
+                                             stderr=subprocess.PIPE,
+                                             universal_newlines=True)
+        stdout, stderr = generated.communicate()
+        if stderr:
             raise Exception('Runtime error!')
-    except Exception as error:
-        print(error, file=sys.stderr)
-        print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
-        print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
-        sys.exit(1)
-
-
-def compile_them(lang_choice):
-    """
-    Compiles the code.
-    Raises error if there's some compilation error.
-
-    Argument:
-    lang_choice -- The choice of language which is chosen by the user
-    """
-
-    try:
-        if os.system(LANGS[lang_choice]['compile']) != 0:
-            raise Exception('Compilation error!')
     except Exception as error:
         print(error, file=sys.stderr)
         print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
@@ -75,10 +117,11 @@ def zip_hackerrank():
     Zips files into 'test-cases.zip'.
     Input files are named as input<number>.txt and are placed inside
     'input' directory in zip.
-    Output files are named as output<number>.txt and are placed inside'output' directory in zip.
+    Output files are named as output<number>.txt and are placed inside
+    'output' directory in zip.
     """
 
-    with zipfile.ZipFile(TC_SOURCE + '.zip', 'w', \
+    with zipfile.ZipFile(TC_ZIP, 'w', \
         zipfile.ZIP_DEFLATED) as zip_file:
         for in_file in os.listdir(IN_SOURCE):
             zip_file.write(os.path.join(IN_SOURCE, in_file), \
@@ -86,7 +129,7 @@ def zip_hackerrank():
         for out_file in os.listdir(OUT_SOURCE):
             zip_file.write(os.path.join(OUT_SOURCE, out_file), \
                 os.path.join('output', out_file))
-    print(f"Test cases saved in {TC_SOURCE + '.zip'}")
+    print(f"Test cases saved in {TC_ZIP}")
 
 
 def zip_hackerearth():
@@ -96,7 +139,7 @@ def zip_hackerearth():
     Output files are named as out<number>.txt and are placed inside the zip.
     """
 
-    with zipfile.ZipFile(TC_SOURCE + '.zip', 'w', \
+    with zipfile.ZipFile(TC_ZIP, 'w', \
         zipfile.ZIP_DEFLATED) as zip_file:
         for in_file in os.listdir(IN_SOURCE):
             zip_file.write(os.path.join(IN_SOURCE, in_file), \
@@ -104,7 +147,7 @@ def zip_hackerearth():
         for out_file in os.listdir(OUT_SOURCE):
             zip_file.write(os.path.join(OUT_SOURCE, out_file), \
                 out_file.replace('put', ''))
-    print(f"Test cases saved in {TC_SOURCE + '.zip'}")
+    print(f"Test cases saved in {TC_ZIP}")
 
 
 def zip_codechef():
@@ -125,7 +168,7 @@ def zip_codechef():
 
 def zip_them(test_files, lang_choice, pltfrm_choice):
     """
-    Calls generate function for each test case, checks for blank output files and
+    Calls generate function for each test case, checks for empty output files and
     then calls the zipping function for the platform chosen by the user.
 
     Arguments:
@@ -138,14 +181,12 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
 
     for i in range(0, test_files + 1):
         print(f'Generating output: {i}')
-        exe_command = 'generate({0}, {1})'.format(lang_choice, i)
+        exe_command = f'generate({lang_choice}, {i})'
         exe_time = timeit.timeit(exe_command, globals=globals(), number=1)
-        print(f'Time taken to execute this TC {exe_time:02f} seconds', \
-            file=sys.stderr)
+        print(f'Time taken to execute this TC {exe_time:02f} seconds')
         out_file = os.path.join(OUT_SOURCE, f'output{i:02d}.txt')
         try:
-            if os.stat(out_file).st_size == 0:
-                raise Exception('Blank output file!')
+            check_empty(out_file)
         except Exception as error:
             print(error, file=sys.stderr)
     print('Zipping ... ')
@@ -160,26 +201,20 @@ def main():
     logic defined in the input area and calls in the complie_them and zip_them function.
     """
 
-    if not os.path.exists(IN_SOURCE):
-        os.mkdir(IN_SOURCE)
-    if not os.path.exists(OUT_SOURCE):
-        os.mkdir(OUT_SOURCE)
-
     try:
         lang_choice = int(input(
             "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
         pltfrm_choice = int(input(
             "Enter your choice of platform\n1. HackerRank\n2. HackerEarth\n3. CodeChef\n"))
     except (SyntaxError, ValueError):
-        print("You didn't enter a number!")
+        print("You didn't enter a number!", file=sys.stderr)
         sys.exit(1)
 
-    if lang_choice not in range(1, 7):
-        print("Wrong choice entered!")
+    if lang_choice not in range(1, 7) or pltfrm_choice not in range(1, 4):
+        print("Wrong choice entered!", file=sys.stderr)
         sys.exit(1)
-    if pltfrm_choice not in range(1, 4):
-        print("Wrong choice entered!")
-        sys.exit(1)
+
+    make_dirs()
 
     lang_choice -= 1
     pltfrm_choice -= 1
@@ -199,7 +234,7 @@ def main():
         for _ in range(required_input):
             print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
-        sys.stdout = sys.__stdout__
+        sys.stdout.close()
         # Input File Printing Ends
 
     compile_them(lang_choice)
