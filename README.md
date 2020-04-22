@@ -126,6 +126,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/dastgirp"><img src="https://avatars0.githubusercontent.com/u/2889931?v=4" width="100px;" alt=""/><br /><sub><b>Dastgir</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=dastgirp" title="Documentation">📖</a></td>
     <td align="center"><a href="http://www.sai-adarsh.ml/"><img src="https://avatars1.githubusercontent.com/u/21096774?v=4" width="100px;" alt=""/><br /><sub><b>Sai Adarsh S</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=Sai-Adarsh" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/rounak-agarwal/"><img src="https://avatars3.githubusercontent.com/u/38394281?v=4" width="100px;" alt=""/><br /><sub><b>Rounak Agarwal</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=agarwalrounak" title="Code">💻</a> <a href="https://medium.com/@agarwalrounak/my-nwoc-njack-winter-of-code-2018-experience-badf30b9c02d" title="Blogposts">📝</a></td>
   </tr>
 </table>
 
