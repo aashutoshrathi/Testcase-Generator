@@ -102,7 +102,7 @@ def compile_them(lang_choice):
 
 def generate(lang_choice, i):
     """
-    Passes input through the compiled code (Except Python) and generates
+    Passes input through the compiled code (Except for Python) and generates
     output files.
     Raises error if there's a problem while running.
 
@@ -118,7 +118,12 @@ def generate(lang_choice, i):
                                          stdout=out_file,
                                          stderr=subprocess.PIPE,
                                          universal_newlines=True)
-    stdout, stderr = generated.communicate()
+            stdout, stderr = generated.communicate()
+    with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'rb') as in_file:
+        content = in_file.read()
+    with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'wb') as out_file:
+        for line in content.splitlines():
+            out_file.write(line + b'\n')
     if stderr:
         raise RunError('Runtime error!')
 

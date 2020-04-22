@@ -4,13 +4,11 @@
 
 [![](https://img.shields.io/travis/aashutoshrathi/Testcase-Generator?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
 
-One Click Test Case Generation for [HackerRank](https://www.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems.
+Handy script to generate Test Cases for [HackerRank](https://www.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems
 
 Are you a Problem Author?
-
 The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
-
-Well, Here is one Click **Python** Code, for your respective logic (solution).
+Well, here is a handy **Python** Script, for your respective logic (solution).
 
 # Table of Contents
 - [Testcase Generator](#testcase-generator)
