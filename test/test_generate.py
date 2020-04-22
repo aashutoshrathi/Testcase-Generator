@@ -7,8 +7,8 @@ import sys
 import shutil
 import pytest
 
-from tc_generator.tc_gen import (IN_SOURCE, OUT_SOURCE, RINT, POWER,
-                                 generate, check_empty, make_dirs)
+from tc_generator.tc_gen import (IN_SOURCE, OUT_SOURCE, RINT, POWER, generate, check_empty,
+                                 make_dirs, EmptyFileException, CompilationError)
 
 
 TEST_FILES = 4 # Number of files to create for testing
@@ -24,7 +24,7 @@ def make_input_files():
     make_dirs()
 
     for i in range(0, TEST_FILES + 1):
-        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
+        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w+')
 
         required_input = RINT(5, POWER(10, (i // 2) + 1))
         print(required_input)  # Prints x into input file
@@ -35,8 +35,8 @@ def make_input_files():
 
     yield
 
-    shutil.rmtree(IN_SOURCE)
-    shutil.rmtree(OUT_SOURCE)
+    # shutil.rmtree(IN_SOURCE)
+    # shutil.rmtree(OUT_SOURCE)
 
 
 def test_generate():
@@ -48,15 +48,17 @@ def test_generate():
 
     # Tests if generate() runs successfuly
     for i in range(0, TEST_FILES + 1):
-        generate(TEST_LANG, i)
+        try:
+            generate(TEST_LANG, i)
+        except CompilationError:
+            pytest.fail("Compilation Error")
         if not os.path.exists(os.path.join(OUT_SOURCE, f'output{i:02d}.txt')):
-            assert False
+            pytest.fail("Output file not found")
 
     # Tests if generate() throws error
     for i in range(TEST_FILES + 1, TEST_FILES + 2):
-        with pytest.raises(SystemExit) as sys_exit:
+        with pytest.raises(FileNotFoundError):
             generate(TEST_LANG, i)
-        assert sys_exit.value.code == 1
 
 
 def test_empty():
@@ -71,8 +73,8 @@ def test_empty():
         out_file = os.path.join(OUT_SOURCE, f'output{i:02d}.txt')
         try:
             check_empty(out_file)
-        except Exception as error:
-            assert False
+        except EmptyFileException:
+            pytest.fail("Empty file found!")
 
     # Tests if correctly identifies empty files
     for i in range(TEST_FILES + 1, TEST_FILES + 2):

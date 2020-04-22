@@ -5,11 +5,16 @@ Testcase Generator for HackerRank, HackerEarth and CodeChef
 
 Usage: Run 'python tc_gen.py' and follow the prompt to select
 language and platform for testcase generation.
+
+To change input file logic, go to the line with the comment
+"# Input area will start here" and edit the lines below, according
+to the pattern you want.
 """
 
 __all__ = ['DIRNAME', 'IN_SOURCE', 'OUT_SOURCE', 'POWER', 'RINT', 'TC_SOURCE', 'generate',
            'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them',
-           'check_empty', 'make_dirs']
+           'check_empty', 'make_dirs', 'Error', 'EmptyFileException', 'CompilationError',
+           'RunError', 'ValueOutsideRange']
 
 import math
 import os
@@ -23,6 +28,28 @@ import subprocess
 from tc_generator.lang_compiler import LANGS
 
 
+class Error(Exception):
+    """Base class for other exceptions."""
+    pass
+
+class EmptyFileException(Error):
+    """Raised when output file is empty"""
+    pass
+
+class CompilationError(Error):
+    """Raised when logic program is not compiled properly"""
+    pass
+
+class RunError(Error):
+    """Raised when logic program encounters runtime error"""
+    pass
+
+class ValueOutsideRange(Error):
+    """Raised when value entered is outside range"""
+    pass
+
+
+
 DIRNAME = os.path.abspath(os.path.dirname(__file__)) # Absolute path of the file
 IN_SOURCE = os.path.join(DIRNAME, 'input')
 OUT_SOURCE = os.path.join(DIRNAME, 'output')
@@ -33,9 +60,7 @@ RINT = random.randint
 
 
 def make_dirs():
-    """
-    Deletes old directories and creates new ones
-    """
+    """Deletes old directories and creates new ones."""
 
     shutil.rmtree(IN_SOURCE, ignore_errors=True)
     shutil.rmtree(OUT_SOURCE, ignore_errors=True)
@@ -50,12 +75,10 @@ def make_dirs():
 
 
 def check_empty(file):
-    """
-    Raises exception if file is empty
-    """
+    """Raises exception if file is empty."""
 
     if os.stat(file).st_size == 0:
-        raise Exception('Empty output file!')
+        raise EmptyFileException('Empty output file!')
 
 
 def compile_them(lang_choice):
@@ -67,20 +90,14 @@ def compile_them(lang_choice):
     lang_choice -- The choice of language which is chosen by the user
     """
 
-    try:
-        compiled = subprocess.Popen(LANGS[lang_choice]['compile'],
-                                    stdin=subprocess.PIPE,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    universal_newlines=True)
-        stdout, stderr = compiled.communicate()
-        if stderr:
-            raise Exception('Compilation error!')
-    except Exception as error:
-        print(error, file=sys.stderr)
-        print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
-        print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
-        sys.exit(1)
+    compiled = subprocess.Popen(LANGS[lang_choice]['compile'],
+                                stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                universal_newlines=True)
+    stdout, stderr = compiled.communicate()
+    if stderr:
+        raise CompilationError('Compilation error!')
 
 
 def generate(lang_choice, i):
@@ -94,22 +111,16 @@ def generate(lang_choice, i):
     i           -- 'i'th testcase for which output is to be generated
     """
 
-    try:
-        with open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'r') as in_file:
-            with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'w+') as out_file:
-                generated = subprocess.Popen(LANGS[lang_choice]['command'],
-                                             stdin=in_file,
-                                             stdout=out_file,
-                                             stderr=subprocess.PIPE,
-                                             universal_newlines=True)
-        stdout, stderr = generated.communicate()
-        if stderr:
-            raise Exception('Runtime error!')
-    except Exception as error:
-        print(error, file=sys.stderr)
-        print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
-        print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
-        sys.exit(1)
+    with open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'r+') as in_file:
+        with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'w+') as out_file:
+            generated = subprocess.Popen(LANGS[lang_choice]['command'],
+                                         stdin=in_file,
+                                         stdout=out_file,
+                                         stderr=subprocess.PIPE,
+                                         universal_newlines=True)
+    stdout, stderr = generated.communicate()
+    if stderr:
+        raise RunError('Runtime error!')
 
 
 def zip_hackerrank():
@@ -182,13 +193,22 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
     for i in range(0, test_files + 1):
         print(f'Generating output: {i}')
         exe_command = f'generate({lang_choice}, {i})'
-        exe_time = timeit.timeit(exe_command, globals=globals(), number=1)
+        try:
+            exe_time = timeit.timeit(exe_command, globals=globals(), number=1)
+        except RunError as run_error:
+            print(run_error, file=sys.stderr)
+            print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
+            print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
+            sys.exit(1)
+        except FileNotFoundError as no_file:
+            print(no_file, file=sys.stderr)
+            sys.exit(1)
         print(f'Time taken to execute this TC {exe_time:02f} seconds')
         out_file = os.path.join(OUT_SOURCE, f'output{i:02d}.txt')
         try:
             check_empty(out_file)
-        except Exception as error:
-            print(error, file=sys.stderr)
+        except EmptyFileException as empty_file:
+            print(empty_file, file=sys.stderr)
     print('Zipping ... ')
 
     zip_choice = platforms[pltfrm_choice]
@@ -206,11 +226,16 @@ def main():
             "Enter your choice of language\n1. C\n2. C++\n3. Java\n4. Python\n5. C#\n6. Go\n"))
         pltfrm_choice = int(input(
             "Enter your choice of platform\n1. HackerRank\n2. HackerEarth\n3. CodeChef\n"))
-    except (SyntaxError, ValueError):
+        if lang_choice not in range(1, 7):
+            raise ValueOutsideRange("Choice of language should be in 1 to 6!")
+        if pltfrm_choice not in range(1, 4):
+            raise ValueOutsideRange("Choice of platform should be in 1 to 3!")
+    except (SyntaxError, ValueError) as err:
+        print(err, file=sys.stderr)
         print("You didn't enter a number!", file=sys.stderr)
         sys.exit(1)
-
-    if lang_choice not in range(1, 7) or pltfrm_choice not in range(1, 4):
+    except ValueOutsideRange as val_err:
+        print(val_err, file=sys.stderr)
         print("Wrong choice entered!", file=sys.stderr)
         sys.exit(1)
 
@@ -237,7 +262,14 @@ def main():
         sys.stdout.close()
         # Input File Printing Ends
 
-    compile_them(lang_choice)
+    try:
+        compile_them(lang_choice)
+    except CompilationError as comp_error:
+        print(comp_error, file=sys.stderr)
+        print(f"Looks like you don't have {LANGS[lang_choice]['req']} :/", file=sys.stderr)
+        print(f"You can refer to {LANGS[lang_choice]['link']} for help.", file=sys.stderr)
+        sys.exit(1)
+
     zip_them(test_files, lang_choice, pltfrm_choice)
 
     shutil.rmtree(IN_SOURCE)

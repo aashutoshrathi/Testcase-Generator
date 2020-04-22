@@ -27,7 +27,7 @@ def make_input_files():
     make_dirs()
 
     for i in range(0, TEST_FILES + 1):
-        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
+        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w+')
 
         required_input = RINT(5, POWER(10, (i // 2) + 1))
         print(required_input)  # Prints x into input file
