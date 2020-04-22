@@ -10,7 +10,7 @@ import pytest
 
 from tc_generator.tc_gen import (TC_SOURCE, IN_SOURCE, OUT_SOURCE, RINT, POWER,
                                  generate, zip_codechef, zip_hackerearth,
-                                 zip_hackerrank, make_dirs)
+                                 zip_hackerrank, make_dirs, make_lf_ending)
 
 
 TEST_FILES = 4 # Number of files to create for testing
@@ -19,9 +19,9 @@ TC_ZIP = TC_SOURCE + '.zip'
 
 
 @pytest.fixture(autouse=True)
-def make_input_files():
+def make_tc_files():
     """
-    Creates the input files for testing
+    Creates the TC files for testing
     """
 
     make_dirs()
@@ -59,7 +59,7 @@ def test_zip_codechef():
     print(sorted(tc_files), file=sys.stderr)
     print(sorted(generated_files), file=sys.stderr)
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_codechef() failed!")
 
     shutil.rmtree(TC_SOURCE)
 
@@ -80,7 +80,7 @@ def test_zip_hackerearth():
         generated_files.append(f'in{i:02d}.txt')
         generated_files.append(f'out{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_hackerearth() failed!")
 
     os.remove(TC_ZIP)
 
@@ -101,6 +101,6 @@ def test_zip_hackerrank():
         generated_files.append(f'input/input{i:02d}.txt')
         generated_files.append(f'output/output{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_hackerrank() failed!")
 
     os.remove(TC_ZIP)

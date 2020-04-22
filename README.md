@@ -76,6 +76,8 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 * Enter the choice of platform when prompted
 * The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
 
+
+
 ## How it Works ? 🤔
 
 ![Demo](demo3.gif)
@@ -102,7 +104,7 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 ```sh
   $ pytest
 ```
-* If the code shows '5 tests passed', the generator is working correctly.
+* If no tests fail, the generator is working correctly.
 
 # Contributors ✨
 

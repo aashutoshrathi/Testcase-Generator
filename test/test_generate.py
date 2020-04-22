@@ -8,7 +8,7 @@ import shutil
 import pytest
 
 from tc_generator.tc_gen import (IN_SOURCE, OUT_SOURCE, RINT, POWER, generate, check_empty,
-                                 make_dirs, EmptyFileException, CompilationError)
+                                 make_dirs, EmptyFileException, CompilationError, make_lf_ending)
 
 
 TEST_FILES = 4 # Number of files to create for testing

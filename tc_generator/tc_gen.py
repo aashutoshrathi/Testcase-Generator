@@ -14,7 +14,7 @@ to the pattern you want.
 __all__ = ['DIRNAME', 'IN_SOURCE', 'OUT_SOURCE', 'POWER', 'RINT', 'TC_SOURCE', 'generate',
            'compile_them', 'zip_codechef', 'zip_hackerrank', 'zip_hackerearth', 'zip_them',
            'check_empty', 'make_dirs', 'Error', 'EmptyFileException', 'CompilationError',
-           'RunError', 'ValueOutsideRange']
+           'RunError', 'ValueOutsideRange', 'make_lf_ending']
 
 import math
 import os
@@ -57,6 +57,8 @@ TC_SOURCE = os.path.join(DIRNAME, 'test-cases')
 TC_ZIP = TC_SOURCE + '.zip'
 POWER = math.pow
 RINT = random.randint
+WINDOWS_LINE_ENDING = b'\r\n'
+UNIX_LINE_ENDING = b'\n'
 
 
 def make_dirs():
@@ -81,6 +83,16 @@ def check_empty(file):
         raise EmptyFileException('Empty output file!')
 
 
+def make_lf_ending(file):
+    """Converts all crlf line endings to lf"""
+
+    with open(file, 'rb') as in_file:
+        content = in_file.read()
+    content = content.replace(WINDOWS_LINE_ENDING, UNIX_LINE_ENDING)
+    with open(file, 'wb') as out_file:
+        out_file.write(content)
+
+
 def compile_them(lang_choice):
     """
     Compiles the code.
@@ -89,8 +101,11 @@ def compile_them(lang_choice):
     Argument:
     lang_choice -- The choice of language which is chosen by the user
     """
+
+    # Don't run compile for Python
     if lang_choice == 3:
         return
+
     compiled = subprocess.Popen(LANGS[lang_choice]['compile'],
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE,
@@ -119,12 +134,7 @@ def generate(lang_choice, i):
                                          stdout=out_file,
                                          stderr=subprocess.PIPE,
                                          universal_newlines=True)
-    # Converts all crlf line endings to lf
-    with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'rb') as in_file:
-        content = in_file.read()
-    with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'wb') as out_file:
-        for line in content.splitlines():
-            out_file.write(line + b'\n')
+
     sdout,stderr = generated.communicate()
     if stderr:
         raise RunError(f'Runtime error!\n{stderr}')
@@ -199,7 +209,9 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
 
     for i in range(0, test_files + 1):
         print(f'Generating output: {i}')
+
         exe_command = f'generate({lang_choice}, {i})'
+
         try:
             exe_time = timeit.timeit(exe_command, globals=globals(), number=1)
         except RunError as run_error:
@@ -210,14 +222,17 @@ def zip_them(test_files, lang_choice, pltfrm_choice):
         except FileNotFoundError as no_file:
             print(no_file, file=sys.stderr)
             sys.exit(1)
+
         print(f'Time taken to execute this TC {exe_time:02f} seconds')
+
         out_file = os.path.join(OUT_SOURCE, f'output{i:02d}.txt')
+        make_lf_ending(out_file)
         try:
             check_empty(out_file)
         except EmptyFileException as empty_file:
             print(empty_file, file=sys.stderr)
-    print('Zipping ... ')
 
+    print('Zipping ... ')
     zip_choice = platforms[pltfrm_choice]
     zip_choice()
 
@@ -254,7 +269,8 @@ def main():
 
     for i in range(0, test_files + 1):
         print(f'Generating input: {i}')
-        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
+        in_file = os.path.join(IN_SOURCE, f'input{i:02d}.txt')
+        sys.stdout = open(in_file, 'w')
 
         # Input area will start here,
         # everything that you print out here will be taken as input in your logic file.
@@ -266,8 +282,10 @@ def main():
         for _ in range(required_input):
             print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
-        sys.stdout = sys.__stdout__
         # Input File Printing Ends
+        sys.stdout = sys.__stdout__
+
+        make_lf_ending(in_file)
 
     try:
         compile_them(lang_choice)
