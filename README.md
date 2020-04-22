@@ -76,7 +76,7 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 * Enter the choice of platform when prompted
 * The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
 
-
+**Tip:** If you're creating testcases for [CodeChef](https://codechef.com) then you can validate that the input sequence is generated according to the constraints using [this validator file](https://gist.github.com/thepushkarp/214402befde421b052443c0560991621). 😉
 
 ## How it Works ? 🤔
 
