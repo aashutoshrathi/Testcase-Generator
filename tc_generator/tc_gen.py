@@ -89,15 +89,16 @@ def compile_them(lang_choice):
     Argument:
     lang_choice -- The choice of language which is chosen by the user
     """
-
+    if lang_choice == 3:
+        return
     compiled = subprocess.Popen(LANGS[lang_choice]['compile'],
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
                                 universal_newlines=True)
-    stdout, stderr = compiled.communicate()
+    sdout,stderr = compiled.communicate()
     if stderr:
-        raise CompilationError('Compilation error!')
+        raise CompilationError(f'Compilation error!\n{stderr}')
 
 
 def generate(lang_choice, i):
@@ -118,14 +119,15 @@ def generate(lang_choice, i):
                                          stdout=out_file,
                                          stderr=subprocess.PIPE,
                                          universal_newlines=True)
-            stdout, stderr = generated.communicate()
+    # Converts all crlf line endings to lf
     with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'rb') as in_file:
         content = in_file.read()
     with open(os.path.join(OUT_SOURCE, f'output{i:02d}.txt'), 'wb') as out_file:
         for line in content.splitlines():
             out_file.write(line + b'\n')
+    sdout,stderr = generated.communicate()
     if stderr:
-        raise RunError('Runtime error!')
+        raise RunError(f'Runtime error!\n{stderr}')
 
 
 def zip_hackerrank():
@@ -264,7 +266,7 @@ def main():
         for _ in range(required_input):
             print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
-        sys.stdout.close()
+        sys.stdout = sys.__stdout__
         # Input File Printing Ends
 
     try:

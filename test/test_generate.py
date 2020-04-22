@@ -31,12 +31,12 @@ def make_input_files():
         for _ in range(required_input):
             print(RINT(1, POWER(10, min(4, max(i // 2, 2)))))
 
-        sys.stdout.close()
+        sys.stdout = sys.__stdout__
 
     yield
 
-    # shutil.rmtree(IN_SOURCE)
-    # shutil.rmtree(OUT_SOURCE)
+    shutil.rmtree(IN_SOURCE)
+    shutil.rmtree(OUT_SOURCE)
 
 
 def test_generate():
