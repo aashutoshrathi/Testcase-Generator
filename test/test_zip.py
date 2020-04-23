@@ -10,7 +10,8 @@ import pytest
 
 from tc_generator.tc_gen import (TC_SOURCE, IN_SOURCE, OUT_SOURCE, RINT, POWER,
                                  generate, zip_codechef, zip_hackerearth,
-                                 zip_hackerrank)
+                                 zip_hackerrank, make_dirs, make_lf_ending)
+
 
 TEST_FILES = 4 # Number of files to create for testing
 TEST_LANG = 3 # Testing for Python
@@ -18,18 +19,15 @@ TC_ZIP = TC_SOURCE + '.zip'
 
 
 @pytest.fixture(autouse=True)
-def make_input_files():
+def make_tc_files():
     """
-    Creates the input files for testing
+    Creates the TC files for testing
     """
 
-    if not os.path.exists(IN_SOURCE):
-        os.mkdir(IN_SOURCE)
-    if not os.path.exists(OUT_SOURCE):
-        os.mkdir(OUT_SOURCE)
+    make_dirs()
 
     for i in range(0, TEST_FILES + 1):
-        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w')
+        sys.stdout = open(os.path.join(IN_SOURCE, f'input{i:02d}.txt'), 'w+')
 
         required_input = RINT(5, POWER(10, (i // 2) + 1))
         print(required_input)  # Prints x into input file
@@ -58,8 +56,10 @@ def test_zip_codechef():
     for i in range(0, TEST_FILES + 1):
         generated_files.append(f'input{i:02d}.txt')
         generated_files.append(f'output{i:02d}.txt')
+    print(sorted(tc_files), file=sys.stderr)
+    print(sorted(generated_files), file=sys.stderr)
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_codechef() failed!")
 
     shutil.rmtree(TC_SOURCE)
 
@@ -80,7 +80,7 @@ def test_zip_hackerearth():
         generated_files.append(f'in{i:02d}.txt')
         generated_files.append(f'out{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_hackerearth() failed!")
 
     os.remove(TC_ZIP)
 
@@ -101,6 +101,6 @@ def test_zip_hackerrank():
         generated_files.append(f'input/input{i:02d}.txt')
         generated_files.append(f'output/output{i:02d}.txt')
     if sorted(tc_files) != sorted(generated_files):
-        assert False
+        pytest.fail("zip_hackerrank() failed!")
 
     os.remove(TC_ZIP)

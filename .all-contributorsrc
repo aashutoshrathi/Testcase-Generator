@@ -100,6 +100,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "agarwalrounak",
+      "name": "Rounak Agarwal",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/38394281?v=4",
+      "profile": "https://www.linkedin.com/in/rounak-agarwal/",
+      "contributions": [
+        "code",
+        "blog"
+      ]
     }
   ],
   "contributorsPerLine": 7

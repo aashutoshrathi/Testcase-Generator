@@ -4,13 +4,11 @@
 
 [![](https://img.shields.io/travis/aashutoshrathi/Testcase-Generator?style=for-the-badge)](https://travis-ci.org/aashutoshrathi/Testcase-Generator)
 
-One Click Test Case Generation for [HackerRank](https://www.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems.
+Handy script to generate Test Cases for [HackerRank](https://www.hackerrank.com), [HackerEarth](https://www.hackerearth.com) and [CodeChef](https://www.codechef.com) Problems
 
 Are you a Problem Author?
-
 The toughest part of creating a problem is creating tricky, correct and constrained Test Cases.
-
-Well, Here is one Click **Python** Code, for your respective logic (solution).
+Well, here is a handy **Python** Script, for your respective logic (solution).
 
 # Table of Contents
 - [Testcase Generator](#testcase-generator)
@@ -78,6 +76,8 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 * Enter the choice of platform when prompted
 * The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
 
+**Tip:** If you're creating testcases for [CodeChef](https://codechef.com) then you can validate that the input sequence is generated according to the constraints using [this validator file](https://gist.github.com/thepushkarp/214402befde421b052443c0560991621). 😉
+
 ## How it Works ? 🤔
 
 ![Demo](demo3.gif)
@@ -104,7 +104,7 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 ```sh
   $ pytest
 ```
-* If the code shows '5 tests passed', the generator is working correctly.
+* If no tests fail, the generator is working correctly.
 
 # Contributors ✨
 
@@ -126,6 +126,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/dastgirp"><img src="https://avatars0.githubusercontent.com/u/2889931?v=4" width="100px;" alt=""/><br /><sub><b>Dastgir</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=dastgirp" title="Documentation">📖</a></td>
     <td align="center"><a href="http://www.sai-adarsh.ml/"><img src="https://avatars1.githubusercontent.com/u/21096774?v=4" width="100px;" alt=""/><br /><sub><b>Sai Adarsh S</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=Sai-Adarsh" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/rounak-agarwal/"><img src="https://avatars3.githubusercontent.com/u/38394281?v=4" width="100px;" alt=""/><br /><sub><b>Rounak Agarwal</b></sub></a><br /><a href="https://github.com/aashutoshrathi/Testcase-Generator/commits?author=agarwalrounak" title="Code">💻</a> <a href="https://medium.com/@agarwalrounak/my-nwoc-njack-winter-of-code-2018-experience-badf30b9c02d" title="Blogposts">📝</a></td>
   </tr>
 </table>
 
