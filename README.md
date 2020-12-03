@@ -11,6 +11,7 @@ The toughest part of creating a problem is creating tricky, correct and constrai
 Well, here is a handy **Python** Script, for your respective logic (solution).
 
 # Table of Contents
+
 - [Testcase Generator](#testcase-generator)
 - [Table of Contents](#table-of-contents)
 - [Mentions](#mentions)
@@ -20,61 +21,68 @@ Well, here is a handy **Python** Script, for your respective logic (solution).
   - [How it Works ? 🤔](#how-it-works--)
   - [Setup using Docker 🐳](#setup-using-docker-)
   - [Running Tests ✅](#running-tests-)
+- [FAQ 📃](#faq-)
 - [Contributors ✨](#contributors-)
 - [Stargazers over time 📈](#stargazers-over-time-)
 
 # Mentions
 
-- [Blog post](https://medium.com/@agarwalrounak/my-nwoc-njack-winter-of-code-2018-experience-badf30b9c02d) on experince in NWoC 2018 by Rounak Agarwal.
-- Selected as project in [GSSoC 2019](https://www.gssoc.tech/projects.html)
-- Selected as project in [NJACKWinterOfCode 2018]([https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator](https://njackwinterofcode.github.io/))
+-   [Blog post](https://medium.com/@agarwalrounak/my-nwoc-njack-winter-of-code-2018-experience-badf30b9c02d) on experince in NWoC 2018 by Rounak Agarwal.
+-   Selected as project in [GSSoC 2019](https://www.gssoc.tech/projects.html)
+-   Selected as project in [NJACKWinterOfCode 2018](<[https://github.com/NJACKWinterOfCode/HackerRank-Test-Case-Generator](https://njackwinterofcode.github.io/)>)
 
 # Supported Languages
 
 The following languages are supported for testcase generation:
 
-- [C](/tc_generator/logic.c)
-- [C++](/tc_generator/logic.cpp)
-- [Java](/tc_generator/logic.java)
-- [Python](/tc_generator/logic.py)
-- [C#](/tc_generator/logic.cs)
-- [Go](/tc_generator/logic.go)
+-   [C](/tc_generator/logic.c)
+-   [C++](/tc_generator/logic.cpp)
+-   [Java](/tc_generator/logic.java)
+-   [Python](/tc_generator/logic.py)
+-   [C#](/tc_generator/logic.cs)
+-   [Go](/tc_generator/logic.go)
 
 # Install
 
 ## How to Use ? 😃
 
-* Clone the repository `$ git clone https://github.com/aashutoshrathi/Testcase-Generator.git`
+-   Clone the repository `$ git clone https://github.com/aashutoshrathi/Testcase-Generator.git`
 
-* Create a virtual environment `$ virtualenv venv ` ([click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv)
-  * #### Activate virtualenv (Linux)
-  ```sh
-    $ source ./venv/bin/activate
-  ```
-  * #### Activate virtualenv (Windows)
-  ```sh
-     $ cd venv/Scripts/
-     $ activate
-  ```
-* Install requirements and modules
+-   Create a virtual environment `$ virtualenv venv ` ([click here](https://stackoverflow.com/questions/14604699/how-to-activate-virtualenv) to read about activating virtualenv)
+    -   #### Activate virtualenv (Linux)
+    ```sh
+      $ source ./venv/bin/activate
+    ```
+    -   #### Activate virtualenv (Windows)
+    ```sh
+       $ cd venv/Scripts/
+       $ activate
+    ```
+-   Install requirements and modules
+
 ```sh
    $ pip install -r requirements.txt
    $ pip install -e .
 ```
-* Change directory to `tc_generator `
+
+-   Change directory to `tc_generator `
+
 ```sh
    $ cd tc_generator/
 ```
-* **Edit the logic file of the language of your choice with the code for which you want to generate TCs**
-NOTE: Make sure to keep the classname as '*logic*' in java so that it can compile to '*logic.class*'
-* **Edit the Input area in ```tc_gen.py``` according to the input format you wish to generate**
-* Run the project
+
+-   **Edit the logic file of the language of your choice with the code for which you want to generate TCs**
+    NOTE: Make sure to keep the classname as '_logic_' in java so that it can compile to '_logic.class_'
+-   **Edit the Input area in `tc_gen.py` according to the input format you wish to generate**
+-   Run the project
+
 ```sh
    $ python tc_gen.py
 ```
-* Enter your choice of language when prompted
-* Enter the choice of platform when prompted
-* The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
+
+-   Enter your choice of language when prompted
+-   Enter the choice of platform when prompted
+-   The input and output files would be generated and stored in `test-cases.zip` for HackerRank & HackerEarth and `test-cases` directory for CodeChef.
 
 **Tip:** If you're creating testcases for [CodeChef](https://codechef.com) then you can validate that the input sequence is generated according to the constraints using [this validator file](https://gist.github.com/thepushkarp/214402befde421b052443c0560991621). 😉
 
@@ -91,20 +99,38 @@ NOTE: Make sure to keep the classname as '*logic*' in java so that it can compil
 
 ## Running Tests ✅
 
-* Change Directory to `Testcase-Generator`
+-   Change Directory to `Testcase-Generator`
+
 ```sh
   $ cd Testcase-Generator/
 ```
-* Install requirements and modules
+
+-   Install requirements and modules
+
 ```sh
    $ pip install -r requirements.txt
    $ pip install -e .
 ```
-* Run `pytest`
+
+-   Run `pytest`
+
 ```sh
   $ pytest
 ```
-* If no tests fail, the generator is working correctly.
+
+-   If no tests fail, the generator is working correctly.
+
+# FAQ 📃
+
+1. **How do I compile with a different version of C++?**
+   Changing Line 22 in [`lang_compiler.py`](https://github.com/aashutoshrathi/Testcase-Generator/blob/master/tc_generator/lang_compiler.py) to the line below will compile the file with C++ 17. You can replace the '17' with '11', '14' or '20' in the line below to compile with the respective versions.
+
+```py
+'compile': ['g++', f'{CMD}.cpp', '-o', CMD, '-std=c++17']},
+```
+
+1. **What line ending does it saves the testcases in?**
+   It saves the files with Linux style file endings (LF) in both Linux and Windows (unless the file is opened and saved again in WIndows that may change it to CRLF).
 
 # Contributors ✨
 
@@ -132,6 +158,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
