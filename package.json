@@ -34,7 +34,7 @@
     "express-fileupload": "^1.1.4",
     "express-session": "^1.16.1",
     "express-validator": "^6.1.1",
-    "helmet": "^4.0.0",
+    "helmet": "^5.0.2",
     "mongoose": "^6.0.3",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0"
