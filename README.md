@@ -165,6 +165,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 # Stargazers over time 📈
 
-[![Stargazers over time](https://starcharts.herokuapp.com/aashutoshrathi/Testcase-Generator.svg)](https://starcharts.herokuapp.com/aashutoshrathi/Testcase-Generator)
+[![Star History Chart](https://api.star-history.com/svg?repos=aashutoshrathi/Testcase-Generator&type=Date)](https://star-history.com/#aashutoshrathi/Testcase-Generator&Date)
 
 <p align="center"> Made with ❤ by <a href="https://github.com/aashutoshrathi">Aashutosh Rathi</a></p>
