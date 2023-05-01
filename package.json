@@ -33,7 +33,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.1.4",
     "express-session": "^1.16.1",
-    "express-validator": "^6.1.1",
+    "express-validator": "^7.0.1",
     "helmet": "^6.0.0",
     "mongoose": "^7.0.0",
     "passport": "^0.6.0",
